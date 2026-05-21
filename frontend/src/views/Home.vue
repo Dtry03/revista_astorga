@@ -1,6 +1,8 @@
 <script setup>
 import { ref, computed } from "vue";
 
+const mobileMenu = ref(false);
+
 const articles = ref([
   {
     id: 1,
@@ -87,219 +89,244 @@ const articles = ref([
   },
 ]);
 
+
 const mainArticle = computed(() => articles.value[0]);
 const secondaryArticles = computed(() => articles.value.slice(1, 5));
 const restArticles = computed(() => articles.value.slice(5));
 </script>
 
 <template>
-  <main class="min-h-screen bg-[#f7f4ef] text-[#1a1a1a]">
+  <main class="min-h-screen bg-white text-[#1a1a1a]">
+    <section class="bg-white w-full max-w-7xl mx-auto">
 
-    <!-- TOPBAR -->
-    <header class="border-b border-stone-300 bg-white">
-      <div class="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
-
-        <div class="flex items-center gap-4">
-          <span class="w-3 h-3 rounded-full bg-[#6e0f1d]"></span>
-
-          <p class="uppercase tracking-[0.25em] text-xs font-bold text-stone-500">
-            Revista digital
-          </p>
-        </div>
-
-        <router-link
-          to="/admin"
-          class="text-sm font-semibold hover:text-[#6e0f1d] transition"
-        >
-          Redacción
-        </router-link>
-
-      </div>
-    </header>
-
-    <!-- LOGO -->
-    <section class="bg-white border-b border-stone-300">
-      <div class="max-w-7xl mx-auto px-6 py-10 text-center">
-
-        <h1 class="text-5xl md:text-7xl font-black tracking-tight text-[#6e0f1d]">
-          ASTORGA AL DÍA
-        </h1>
-
-        <p class="mt-4 text-stone-600 text-lg">
-          Noticias, cultura y actualidad de Astorga y la comarca
-        </p>
-
-      </div>
-    </section>
-
-    <!-- MAIN NEWS -->
-    <section
-      v-if="mainArticle"
-      class="max-w-7xl mx-auto px-6 py-10"
-    >
-      <div class="grid lg:grid-cols-[1.6fr_1fr] gap-10">
-
-        <!-- PRINCIPAL -->
-        <article>
-
+      <!-- LOGO -->
+      <section>
+        <div class="px-4 py-3 text-center flex items-center justify-center">
           <img
-            :src="mainArticle.cover_image"
-            class="w-full h-[450px] object-cover"
+            src="../assets/logo.png"
+            alt="logo Horizonte León"
+            class="w-44 sm:w-56 md:w-60 h-auto"
           />
+        </div>
+      </section>
+<!-- MENU -->
+<header class="border-y border-stone-300 bg-white sticky top-0 z-50">
 
-          <div class="mt-6">
+  <!-- DESKTOP -->
+  <nav
+    class="hidden md:flex max-w-5xl mx-auto px-6 py-3 items-center justify-between text-stone-500"
+  >
+    <a href="#" class="hover:text-[#6e0f1d]">Actualidad</a>
+    <a href="#" class="hover:text-[#6e0f1d]">Bierzo</a>
+    <a href="#" class="hover:text-[#6e0f1d]">Astorga - La Bañeza</a>
+    <a href="#" class="hover:text-[#6e0f1d]">León</a>
+    <a href="#" class="hover:text-[#6e0f1d]">Sucesos</a>
+    <a href="#" class="hover:text-[#6e0f1d]">Cultura</a>
+    <a href="#" class="hover:text-[#6e0f1d]">Deportes</a>
+    <a href="#" class="hover:text-[#6e0f1d]">Opinión</a>
+  </nav>
 
-            <p class="uppercase text-sm font-black tracking-[0.25em] text-[#6e0f1d]">
-              {{ mainArticle.category }}
-            </p>
+  <!-- MOBILE -->
+  <div class="md:hidden">
 
-            <h2 class="text-4xl md:text-6xl font-black leading-tight mt-4">
-              {{ mainArticle.title }}
-            </h2>
+    <!-- TOP BAR -->
+    <div class="flex items-center justify-between px-4 py-4">
 
-            <p class="text-stone-600 text-lg mt-5 leading-relaxed">
-              {{ mainArticle.excerpt }}
-            </p>
+      <span class="font-black uppercase tracking-[0.2em] text-sm">
+        Menú
+      </span>
 
-            <router-link
-              :to="`/articulo/${mainArticle.slug}`"
-              class="inline-block mt-7 border-b-4 border-[#6e0f1d] font-black text-lg"
-            >
-              LEER NOTICIA
-            </router-link>
+      <button
+        @click="mobileMenu = !mobileMenu"
+        class="flex flex-col gap-1"
+      >
 
-          </div>
+        <span
+          class="w-6 h-[2px] bg-black transition"
+        ></span>
 
-        </article>
+        <span
+          class="w-6 h-[2px] bg-black transition"
+        ></span>
 
-        <!-- LATERAL -->
-        <div class="space-y-8">
+        <span
+          class="w-6 h-[2px] bg-black transition"
+        ></span>
 
-          <article
-            v-for="article in secondaryArticles"
-            :key="article.id"
-            class="border-b border-stone-300 pb-8"
-          >
+      </button>
 
-            <div class="grid grid-cols-[140px_1fr] gap-5">
+    </div>
 
-              <img
-                :src="article.cover_image"
-                class="w-full h-28 object-cover"
-              />
+    <!-- DROPDOWN -->
+    <transition
+      enter-active-class="transition duration-300 ease-out"
+      enter-from-class="opacity-0 -translate-y-2"
+      enter-to-class="opacity-100 translate-y-0"
+      leave-active-class="transition duration-200 ease-in"
+      leave-from-class="opacity-100 translate-y-0"
+      leave-to-class="opacity-0 -translate-y-2"
+    >
 
-              <div>
+      <nav
+        v-if="mobileMenu"
+        class="border-t border-stone-200 px-4 pb-4 flex flex-col bg-white"
+      >
 
-                <p class="uppercase text-xs font-black tracking-[0.2em] text-[#6e0f1d]">
-                  {{ article.category }}
-                </p>
+        <a href="#" class="py-3 border-b border-stone-100 hover:text-[#6e0f1d]">
+          Actualidad
+        </a>
 
-                <h3 class="text-xl font-black leading-tight mt-2">
-                  {{ article.title }}
-                </h3>
+        <a href="#" class="py-3 border-b border-stone-100 hover:text-[#6e0f1d]">
+          Bierzo
+        </a>
 
-                <router-link
-                  :to="`/articulo/${article.slug}`"
-                  class="inline-block mt-3 text-sm font-bold hover:text-[#6e0f1d]"
-                >
-                  Leer más →
-                </router-link>
+        <a href="#" class="py-3 border-b border-stone-100 hover:text-[#6e0f1d]">
+          Astorga - La Bañeza
+        </a>
 
-              </div>
+        <a href="#" class="py-3 border-b border-stone-100 hover:text-[#6e0f1d]">
+          León
+        </a>
 
+        <a href="#" class="py-3 border-b border-stone-100 hover:text-[#6e0f1d]">
+          Sucesos
+        </a>
+
+        <a href="#" class="py-3 border-b border-stone-100 hover:text-[#6e0f1d]">
+          Cultura
+        </a>
+
+        <a href="#" class="py-3 border-b border-stone-100 hover:text-[#6e0f1d]">
+          Deportes
+        </a>
+
+        <a href="#" class="py-3 hover:text-[#6e0f1d]">
+          Opinión
+        </a>
+
+      </nav>
+
+    </transition>
+
+  </div>
+
+</header>
+
+      <!-- MAIN NEWS -->
+      <section v-if="mainArticle" class="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+        <div class="flex flex-col gap-8 sm:gap-10">
+
+          <!-- PRINCIPAL -->
+          <article>
+            <img
+              :src="mainArticle.cover_image"
+              class="w-full h-64 sm:h-80 md:h-[450px] object-cover"
+            />
+
+            <div class="mt-3">
+              <router-link
+                :to="`/articulo/${mainArticle.slug}`"
+                class="block text-2xl sm:text-3xl md:text-4xl font-black leading-tight hover:underline"
+              >
+                {{ mainArticle.title }}
+              </router-link>
+
+              <p class="uppercase text-[10px] mt-3 font-black tracking-[0.25em] text-[#6e0f1d]">
+                {{ mainArticle.category }}
+              </p>
+
+              <p class="text-stone-600 text-sm sm:text-base mt-3 leading-relaxed">
+                {{ mainArticle.excerpt }}
+              </p>
             </div>
-
           </article>
 
+          <!-- NOTICIAS SECUNDARIAS -->
+          <div class="space-y-6 sm:space-y-8 border-t border-stone-300 pt-6 sm:pt-8">
+            <article
+              v-for="article in secondaryArticles"
+              :key="article.id"
+              class="border-b border-stone-300 pb-6 sm:pb-8"
+            >
+              <div class="grid grid-cols-1 sm:grid-cols-[220px_1fr] md:grid-cols-[240px_1fr] gap-4 sm:gap-5">
+                <img
+                  :src="article.cover_image"
+                  class="w-full h-48 sm:h-32 md:h-28 object-cover"
+                />
+
+                <div>
+                  <p class="uppercase text-[10px] font-black tracking-[0.2em] text-[#6e0f1d]">
+                    {{ article.category }}
+                  </p>
+
+                  <h3 class="text-xl sm:text-2xl font-semibold leading-tight mt-2">
+                    {{ article.title }}
+                  </h3>
+
+                  <p class="text-sm text-stone-600 leading-relaxed mt-2">
+                    {{ article.excerpt }}
+                  </p>
+
+                  <router-link
+                    :to="`/articulo/${article.slug}`"
+                    class="inline-block mt-3 text-sm text-stone-500 underline hover:no-underline"
+                  >
+                    Leer más
+                  </router-link>
+                </div>
+              </div>
+            </article>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- MÁS NOTICIAS -->
+      <section
+        v-if="restArticles.length"
+        class="max-w-5xl mx-auto px-4 sm:px-6 pb-16 sm:pb-20"
+      >
+        <div class="flex items-center gap-4 mb-8 sm:mb-10">
+          <div class="w-10 sm:w-12 h-[3px] bg-[#6e0f1d]"></div>
+
+          <h2 class="text-2xl sm:text-3xl font-black uppercase">
+            Actualidad
+          </h2>
         </div>
 
-      </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-x-8 gap-y-10 sm:gap-y-14">
+          <article
+            v-for="article in restArticles"
+            :key="article.id"
+            class="group"
+          >
+            <div class="overflow-hidden">
+              <img
+                :src="article.cover_image"
+                class="w-full h-56 sm:h-60 object-cover group-hover:scale-105 transition duration-500"
+              />
+            </div>
+
+            <div class="pt-4 sm:pt-5">
+              <p class="uppercase text-[10px] font-black tracking-[0.2em] text-[#6e0f1d]">
+                {{ article.category }}
+              </p>
+
+              <router-link
+                :to="`/articulo/${article.slug}`"
+                class="block text-xl sm:text-2xl font-semibold leading-tight mt-3 transition hover:underline"
+              >
+                {{ article.title }}
+              </router-link>
+
+              <p class="text-stone-600 mt-3 sm:mt-4 leading-relaxed line-clamp-3">
+                {{ article.excerpt }}
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
     </section>
-
-    <!-- MÁS NOTICIAS -->
-   <!-- CUADRÍCULA EDITORIAL -->
-<section
-  v-if="restArticles.length"
-  class="max-w-7xl mx-auto px-6 pb-20"
->
-
-  <div class="flex items-center gap-4 mb-10">
-
-    <div class="w-12 h-[3px] bg-[#6e0f1d]"></div>
-
-    <h2 class="text-3xl font-black uppercase">
-      Actualidad
-    </h2>
-
-  </div>
-
-  <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-x-8 gap-y-14">
-
-    <article
-      v-for="article in restArticles"
-      :key="article.id"
-      class="group"
-    >
-
-      <div class="overflow-hidden">
-
-        <img
-          :src="article.cover_image"
-          class="w-full h-60 object-cover group-hover:scale-105 transition duration-500"
-        />
-
-      </div>
-
-      <div class="pt-5">
-
-        <p class="uppercase text-xs font-black tracking-[0.2em] text-[#6e0f1d]">
-          {{ article.category }}
-        </p>
-
-        <h3 class="text-2xl font-black leading-tight mt-3 group-hover:text-[#6e0f1d] transition">
-          {{ article.title }}
-        </h3>
-
-        <p class="text-stone-600 mt-4 leading-relaxed line-clamp-3">
-          {{ article.excerpt }}
-        </p>
-
-        <router-link
-          :to="`/articulo/${article.slug}`"
-          class="inline-block mt-5 text-sm font-black uppercase tracking-[0.15em] border-b-2 border-[#6e0f1d]"
-        >
-          Leer noticia
-        </router-link>
-
-      </div>
-
-    </article>
-
-  </div>
-
-</section>
-
-    <!-- FOOTER -->
-    <footer class="bg-[#111111] text-white">
-
-      <div class="max-w-7xl mx-auto px-6 py-12">
-
-        <h3 class="text-3xl font-black text-[#a61d35]">
-          ASTORGA AL DÍA
-        </h3>
-
-        <p class="text-stone-400 mt-4 max-w-xl">
-          Revista digital local enfocada en actualidad, cultura,
-          eventos y vida de la comarca.
-        </p>
-
-        <div class="border-t border-white/10 mt-10 pt-6 text-sm text-stone-500">
-          Demo editorial desarrollada para presentación comercial.
-        </div>
-
-      </div>
-
-    </footer>
-
   </main>
 </template>
