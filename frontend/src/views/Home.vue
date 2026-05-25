@@ -101,7 +101,7 @@ const restArticles = computed(() => articles.value.slice(5));
 
       <!-- LOGO -->
       <section>
-        <div class="px-4 py-3 text-center flex items-center justify-center">
+        <div class="md:flex hidden px-4 py-3 text-center  items-center justify-center">
           <img
             src="../assets/logo.png"
             alt="logo Horizonte León"
@@ -132,9 +132,11 @@ const restArticles = computed(() => articles.value.slice(5));
     <!-- TOP BAR -->
     <div class="flex items-center justify-between px-4 py-4">
 
-      <span class="font-black uppercase tracking-[0.2em] text-sm">
-        Menú
-      </span>
+         <img
+            src="../assets/logo.png"
+            alt="logo Horizonte León"
+            class="w-24 sm:w-56 md:w-60 h-auto"
+          />
 
       <button
         @click="mobileMenu = !mobileMenu"
