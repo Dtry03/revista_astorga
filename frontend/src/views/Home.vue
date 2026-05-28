@@ -1,7 +1,9 @@
 <script setup>
 import { ref, computed } from "vue";
 
-const mobileMenu = ref(false);
+import {Smartphone, Newspaper, MessageSquareText, MessageSquareHeart, Share2, CircleUserRound} from 'lucide-vue-next'
+
+const menuOpen = ref(false);
 
 const articles = ref([
   {
@@ -97,121 +99,130 @@ const restArticles = computed(() => articles.value.slice(5));
 
 <template>
   <main class="min-h-screen bg-white text-[#1a1a1a]">
-    <section class="bg-white w-full max-w-7xl mx-auto">
-
-      <!-- LOGO -->
-      <section>
-        <div class="md:flex hidden px-4 py-3 text-center  items-center justify-center">
-          <img
-            src="../assets/logo.png"
-            alt="logo Horizonte León"
-            class="w-44 sm:w-56 md:w-60 h-auto"
-          />
-        </div>
-      </section>
-<!-- MENU -->
-<header class="border-y border-stone-300 bg-white sticky top-0 z-50">
-
-  <!-- DESKTOP -->
-  <nav
-    class="hidden md:flex max-w-5xl mx-auto px-6 py-3 items-center justify-between text-stone-500"
-  >
-    <a href="#" class="hover:text-[#6e0f1d]">Actualidad</a>
-    <a href="#" class="hover:text-[#6e0f1d]">Bierzo</a>
-    <a href="#" class="hover:text-[#6e0f1d]">Astorga - La Bañeza</a>
-    <a href="#" class="hover:text-[#6e0f1d]">León</a>
-    <a href="#" class="hover:text-[#6e0f1d]">Sucesos</a>
-    <a href="#" class="hover:text-[#6e0f1d]">Cultura</a>
-    <a href="#" class="hover:text-[#6e0f1d]">Deportes</a>
-    <a href="#" class="hover:text-[#6e0f1d]">Opinión</a>
-  </nav>
-
-  <!-- MOBILE -->
-  <div class="md:hidden">
-
-    <!-- TOP BAR -->
-    <div class="flex items-center justify-between px-4 py-4">
-
-         <img
-            src="../assets/logo.png"
-            alt="logo Horizonte León"
-            class="w-24 sm:w-56 md:w-60 h-auto"
-          />
-
-      <button
-        @click="mobileMenu = !mobileMenu"
-        class="flex flex-col gap-1"
-      >
-
-        <span
-          class="w-6 h-[2px] bg-black transition"
-        ></span>
-
-        <span
-          class="w-6 h-[2px] bg-black transition"
-        ></span>
-
-        <span
-          class="w-6 h-[2px] bg-black transition"
-        ></span>
-
-      </button>
-
+  <!-- MENU -->
+<header class=" flex flex-col justify-center items-center border-stone-300 bg-white sticky top-0 z-50">
+    <nav
+    class="bg-rose-600 flex w-full  mx-auto px-6 py-1 items-center justify-center text-stone-500">
+    <div class="flex max-w-5xl gap-5 md:gap-15 text-white md:text-[16px] text-[13px]">
+    <a href="#" class="hover:underline">León</a>
+    <a href="#" class="hover:underline">Bierzo</a> 
+    <a href="#" class="hover:underline">Astorga</a>
+    <a href="#" class="hover:underline">La Bañeza</a>
     </div>
 
-    <!-- DROPDOWN -->
-    <transition
+  </nav>
+
+    <div class="bg-white w-full max-w-7xl mx-auto">
+
+    
+
+      <!-- LOGO -->
+      <div class="flex items-center justify-center gap-5 mx-5">
+       <div class="flex items-center justify-center">  
+      <button
+        @click="menuOpen = !menuOpen"
+        class="flex flex-col gap-1.5"
+      >
+        <span class="w-6 h-0.5 bg-rose-500"></span>
+        <span class="w-6 h-0.5 bg-rose-500"></span>
+        <span class="w-6 h-0.5 bg-rose-500"></span>
+      </button>
+
+      </div>
+        <div class="flex px-4  text-center  items-center justify-center">
+          <img
+            src="../assets/logo-imagen.png"
+            alt="logo Horizonte León"
+            class="w-36  md:w-60 "
+          />
+
+            <img
+            src="../assets/logo.png"
+            alt="logo Horizonte León"
+            class="w-36  md:w-60 "
+          />
+        </div>
+        <div class="flex justify-center items-center">
+          <CircleUserRound class="w-8 h-8  text-rose-500 hover:scale-105 transition" />
+        </div>
+
+             
+
+     
+      </div>
+       </div>
+
+
+    <div class="flex justify-center items-center max-w-5xl gap-5 md:gap-5 text-white md:text-[16px] text-[13px] border-r  ">
+          <Smartphone class="w-4 md:w-6 h-6 text-rose-500 hover:scale-105 transition" />
+          <hr class="border h-4 border-rose-500">
+          <Newspaper class="w-4 md:w-6 h-6 text-rose-500 hover:scale-105 transition"  />
+          <hr class="border h-4 border-rose-500">
+          <MessageSquareText class="w-4 md:w-6 h-6 text-rose-500 hover:scale-105 transition" />
+          <hr class="border h-4 border-rose-500">
+          <MessageSquareHeart class="w-4 md:w-6 h-6 text-rose-500 hover:scale-105 transition" />
+          <hr class="border h-4 border-rose-500">
+          <Share2 class="w-4 md:w-6 h-6 text-rose-500 hover:scale-105 transition" />
+
+    </div>
+     <transition
       enter-active-class="transition duration-300 ease-out"
-      enter-from-class="opacity-0 -translate-y-2"
+      enter-from-class="opacity-0 -translate-y-4"
       enter-to-class="opacity-100 translate-y-0"
       leave-active-class="transition duration-200 ease-in"
       leave-from-class="opacity-100 translate-y-0"
-      leave-to-class="opacity-0 -translate-y-2"
+      leave-to-class="opacity-0 -translate-y-4"
     >
 
-      <nav
-        v-if="mobileMenu"
-        class="border-t border-stone-200 px-4 pb-4 flex flex-col bg-white"
+      <div
+        v-if="menuOpen"
+        class="w-full bg-rose-100 my-2"
       >
 
-        <a href="#" class="py-3 border-b border-stone-100 hover:text-[#6e0f1d]">
-          Actualidad
-        </a>
+        <nav class="flex justify-center items-center gap-5 py-2">
 
-        <a href="#" class="py-3 border-b border-stone-100 hover:text-[#6e0f1d]">
-          Bierzo
-        </a>
+          <router-link
+            to="/"
+            class=" border-b border-white/10 hover:text-rose-500"
+            @click="menuOpen = false"
+          >
+            Inicio
+          </router-link>
 
-        <a href="#" class="py-3 border-b border-stone-100 hover:text-[#6e0f1d]">
-          Astorga - La Bañeza
-        </a>
+          <router-link
+            to="/categoria/cultura"
+            class=" border-b border-white/10 hover:text-rose-500"
+            @click="menuOpen = false"
+          >
+            Cultura
+          </router-link>
 
-        <a href="#" class="py-3 border-b border-stone-100 hover:text-[#6e0f1d]">
-          León
-        </a>
+          <router-link
+            to="/categoria/economia"
+            class=" border-b border-white/10 hover:text-rose-500"
+            @click="menuOpen = false"
+          >
+            Economía
+          </router-link>
 
-        <a href="#" class="py-3 border-b border-stone-100 hover:text-[#6e0f1d]">
-          Sucesos
-        </a>
+          <router-link
+            to="/categoria/deporte"
+            class=" border-b border-white/10 hover:text-rose-500"
+            @click="menuOpen = false"
+          >
+            Deporte
+          </router-link>
 
-        <a href="#" class="py-3 border-b border-stone-100 hover:text-[#6e0f1d]">
-          Cultura
-        </a>
 
-        <a href="#" class="py-3 border-b border-stone-100 hover:text-[#6e0f1d]">
-          Deportes
-        </a>
 
-        <a href="#" class="py-3 hover:text-[#6e0f1d]">
-          Opinión
-        </a>
+        </nav>
 
-      </nav>
+      </div>
 
     </transition>
-
-  </div>
-
+    <div>
+      <p class=" text-[9px] md:text-[10px] py-2 font-bold">INFORMACIÓN SIN LIMITES.<span class="text-rose-500"> CONECTAMOS CONTIGO</span> </p>
+    </div>
 </header>
 
       <!-- MAIN NEWS -->
@@ -228,16 +239,16 @@ const restArticles = computed(() => articles.value.slice(5));
             <div class="mt-3">
               <router-link
                 :to="`/articulo/${mainArticle.slug}`"
-                class="block text-2xl sm:text-3xl md:text-4xl font-black leading-tight hover:underline"
+                class="block text-xl sm:text-3xl md:text-4xl font-black teading-relaxed text-justify hyphens-auto max-w-[65ch] hover:underline "
               >
                 {{ mainArticle.title }}
               </router-link>
 
-              <p class="uppercase text-[10px] mt-3 font-black tracking-[0.25em] text-[#6e0f1d]">
+              <p class="uppercase text-[10px] mt-1 font-extrabold tracking-[0.25em] text-rose-500">
                 {{ mainArticle.category }}
               </p>
 
-              <p class="text-stone-600 text-sm sm:text-base mt-3 leading-relaxed">
+              <p class="text-stone-600 mt-1 teading-relaxed text-[12px] text-justify hyphens-auto max-w-[65ch]">
                 {{ mainArticle.excerpt }}
               </p>
             </div>
@@ -250,31 +261,27 @@ const restArticles = computed(() => articles.value.slice(5));
               :key="article.id"
               class="border-b border-stone-300 pb-6 sm:pb-8"
             >
-              <div class="grid grid-cols-1 sm:grid-cols-[220px_1fr] md:grid-cols-[240px_1fr] gap-4 sm:gap-5">
+              <div class="grid grid-cols-2 sm:grid-cols-[220px_1fr] md:grid-cols-[240px_1fr] gap-4 sm:gap-5">
                 <img
                   :src="article.cover_image"
                   class="w-full h-48 sm:h-32 md:h-28 object-cover"
                 />
 
                 <div>
-                  <p class="uppercase text-[10px] font-black tracking-[0.2em] text-[#6e0f1d]">
+               
+                  <router-link
+                    :to="`/articulo/${article.slug}`" class="text-xl sm:text-2xl font-semibold leading-tight mt-2 hover:underline">
+                    {{ article.title }}
+                  </router-link>
+                  <p class="uppercase text-[10px] font-black tracking-[0.2em] mt-2 text-rose-500">
                     {{ article.category }}
                   </p>
 
-                  <h3 class="text-xl sm:text-2xl font-semibold leading-tight mt-2">
-                    {{ article.title }}
-                  </h3>
 
                   <p class="text-sm text-stone-600 leading-relaxed mt-2">
                     {{ article.excerpt }}
                   </p>
 
-                  <router-link
-                    :to="`/articulo/${article.slug}`"
-                    class="inline-block mt-3 text-sm text-stone-500 underline hover:no-underline"
-                  >
-                    Leer más
-                  </router-link>
                 </div>
               </div>
             </article>
@@ -283,52 +290,9 @@ const restArticles = computed(() => articles.value.slice(5));
         </div>
       </section>
 
-      <!-- MÁS NOTICIAS -->
-      <section
-        v-if="restArticles.length"
-        class="max-w-5xl mx-auto px-4 sm:px-6 pb-16 sm:pb-20"
-      >
-        <div class="flex items-center gap-4 mb-8 sm:mb-10">
-          <div class="w-10 sm:w-12 h-[3px] bg-[#6e0f1d]"></div>
+      
 
-          <h2 class="text-2xl sm:text-3xl font-black uppercase">
-            Actualidad
-          </h2>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-x-8 gap-y-10 sm:gap-y-14">
-          <article
-            v-for="article in restArticles"
-            :key="article.id"
-            class="group"
-          >
-            <div class="overflow-hidden">
-              <img
-                :src="article.cover_image"
-                class="w-full h-56 sm:h-60 object-cover group-hover:scale-105 transition duration-500"
-              />
-            </div>
-
-            <div class="pt-4 sm:pt-5">
-              <p class="uppercase text-[10px] font-black tracking-[0.2em] text-[#6e0f1d]">
-                {{ article.category }}
-              </p>
-
-              <router-link
-                :to="`/articulo/${article.slug}`"
-                class="block text-xl sm:text-2xl font-semibold leading-tight mt-3 transition hover:underline"
-              >
-                {{ article.title }}
-              </router-link>
-
-              <p class="text-stone-600 mt-3 sm:mt-4 leading-relaxed line-clamp-3">
-                {{ article.excerpt }}
-              </p>
-            </div>
-          </article>
-        </div>
-      </section>
-
-    </section>
+   
   </main>
+  
 </template>
