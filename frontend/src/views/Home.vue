@@ -102,12 +102,12 @@ const restArticles = computed(() => articles.value.slice(5));
   <!-- MENU -->
 <header class=" flex flex-col justify-center items-center border-stone-300 bg-white sticky top-0 z-50">
     <nav
-    class="bg-rose-600 flex w-full  mx-auto px-6 py-1 items-center justify-center text-stone-500">
+    class="bg-[#B70041] flex w-full  mx-auto px-6 py-1 items-center justify-center text-stone-500">
     <div class="flex max-w-5xl gap-5 md:gap-15 text-white md:text-[16px] text-[13px]">
     <a href="#" class="hover:underline">León</a>
-    <a href="#" class="hover:underline">Bierzo</a> 
+    <a href="#" class="hover:underline">Ponferrada</a> 
     <a href="#" class="hover:underline">Astorga</a>
-    <a href="#" class="hover:underline">La Bañeza</a>
+    <a href="#" class="hover:underline">Bañeza</a>
     </div>
 
   </nav>
@@ -118,18 +118,18 @@ const restArticles = computed(() => articles.value.slice(5));
 
       <!-- LOGO -->
       <div class="flex items-center justify-center gap-5 mx-5">
-       <div class="flex items-center justify-center">  
+       <div class="flex items-center justify-center mr-8">  
       <button
         @click="menuOpen = !menuOpen"
         class="flex flex-col gap-1.5"
       >
-        <span class="w-6 h-0.5 bg-rose-500"></span>
-        <span class="w-6 h-0.5 bg-rose-500"></span>
-        <span class="w-6 h-0.5 bg-rose-500"></span>
+        <span class="w-6 h-0.5 bg-[#B70041]"></span>
+        <span class="w-6 h-0.5 bg-[#B70041]"></span>
+        <span class="w-6 h-0.5 bg-[#B70041]"></span>
       </button>
 
       </div>
-        <div class="flex px-4  text-center  items-center justify-center">
+        <div class="flex  text-center  items-center justify-center">
           <img
             src="../assets/logo-imagen.png"
             alt="logo Horizonte León"
@@ -142,8 +142,8 @@ const restArticles = computed(() => articles.value.slice(5));
             class="w-36  md:w-60 "
           />
         </div>
-        <div class="flex justify-center items-center">
-          <CircleUserRound class="w-8 h-8  text-rose-500 hover:scale-105 transition" />
+        <div class="flex justify-center items-center ml-12">
+          <CircleUserRound  :stroke-width="1.5" class="w-8 h-8  text-[#B70041] hover:scale-105 transition" />
         </div>
 
              
@@ -154,15 +154,15 @@ const restArticles = computed(() => articles.value.slice(5));
 
 
     <div class="flex justify-center items-center max-w-5xl gap-5 md:gap-5 text-white md:text-[16px] text-[13px] border-r  ">
-          <Smartphone class="w-4 md:w-6 h-6 text-rose-500 hover:scale-105 transition" />
-          <hr class="border h-4 border-rose-500">
-          <Newspaper class="w-4 md:w-6 h-6 text-rose-500 hover:scale-105 transition"  />
-          <hr class="border h-4 border-rose-500">
-          <MessageSquareText class="w-4 md:w-6 h-6 text-rose-500 hover:scale-105 transition" />
-          <hr class="border h-4 border-rose-500">
-          <MessageSquareHeart class="w-4 md:w-6 h-6 text-rose-500 hover:scale-105 transition" />
-          <hr class="border h-4 border-rose-500">
-          <Share2 class="w-4 md:w-6 h-6 text-rose-500 hover:scale-105 transition" />
+          <Smartphone class="w-4 md:w-6 h-6 text-[#B70041] hover:scale-105 transition" />
+          <hr class="border h-4 border-[#B70041]">
+          <Newspaper class="w-4 md:w-6 h-6 text-[#B70041] hover:scale-105 transition"  />
+          <hr class="border h-4 border-[#B70041]">
+          <MessageSquareText class="w-4 md:w-6 h-6 text-[#B70041] hover:scale-105 transition" />
+          <hr class="border h-4 border-[#B70041]">
+          <MessageSquareHeart class="w-4 md:w-6 h-6 text-[#B70041] hover:scale-105 transition" />
+          <hr class="border h-4 border-[#B70041]">
+          <Share2 class="w-4 md:w-6 h-6 text-[#B70041] hover:scale-105 transition" />
 
     </div>
      <transition
@@ -176,42 +176,51 @@ const restArticles = computed(() => articles.value.slice(5));
 
       <div
         v-if="menuOpen"
-        class="w-full bg-rose-100 my-2"
+        class="w-full bg-[#B70041]/10 my-2"
       >
 
         <nav class="flex justify-center items-center gap-5 py-2">
 
           <router-link
             to="/"
-            class=" border-b border-white/10 hover:text-rose-500"
+            class="text-sm md:text-[16px] border-b border-white/10 hover:text-[#B70041]"
             @click="menuOpen = false"
           >
-            Inicio
+            Deportes
           </router-link>
 
           <router-link
             to="/categoria/cultura"
-            class=" border-b border-white/10 hover:text-rose-500"
+            class="text-sm md:text-[16px] border-b border-white/10 hover:text-[#B70041]"
             @click="menuOpen = false"
           >
-            Cultura
+            Motor
           </router-link>
 
           <router-link
             to="/categoria/economia"
-            class=" border-b border-white/10 hover:text-rose-500"
+            class="text-sm md:text-[16px] border-b border-white/10 hover:text-[#B70041]"
             @click="menuOpen = false"
           >
-            Economía
+            #tendencias
           </router-link>
 
           <router-link
             to="/categoria/deporte"
-            class=" border-b border-white/10 hover:text-rose-500"
+            class="text-sm md:text-[16px] border-b border-white/10 hover:text-[#B70041]"
             @click="menuOpen = false"
           >
-            Deporte
+            ZonaON
           </router-link>
+
+                    <router-link
+            to="/categoria/deporte"
+            class="text-sm md:text-[16px] border-b border-white/10 hover:text-[#B70041]"
+            @click="menuOpen = false"
+          >
+            Tablón
+          </router-link>
+
 
 
 
@@ -221,7 +230,7 @@ const restArticles = computed(() => articles.value.slice(5));
 
     </transition>
     <div>
-      <p class=" text-[9px] md:text-[10px] py-2 font-bold">INFORMACIÓN SIN LIMITES.<span class="text-rose-500"> CONECTAMOS CONTIGO</span> </p>
+      <p class=" text-[9px] md:text-[10px] py-2 font-bold">INFORMACIÓN SIN LIMITES.<span class="text-[#B70041]"> CONECTAMOS CONTIGO</span> </p>
     </div>
 </header>
 
@@ -244,7 +253,7 @@ const restArticles = computed(() => articles.value.slice(5));
                 {{ mainArticle.title }}
               </router-link>
 
-              <p class="uppercase text-[10px] mt-1 font-extrabold tracking-[0.25em] text-rose-500">
+              <p class="uppercase text-[10px] mt-1 font-extrabold tracking-[0.25em] text-[#B70041]">
                 {{ mainArticle.category }}
               </p>
 
@@ -273,7 +282,7 @@ const restArticles = computed(() => articles.value.slice(5));
                     :to="`/articulo/${article.slug}`" class="text-xl sm:text-2xl font-semibold leading-tight mt-2 hover:underline">
                     {{ article.title }}
                   </router-link>
-                  <p class="uppercase text-[10px] font-black tracking-[0.2em] mt-2 text-rose-500">
+                  <p class="uppercase text-[10px] font-black tracking-[0.2em] mt-2 text-[#B70041]">
                     {{ article.category }}
                   </p>
 
