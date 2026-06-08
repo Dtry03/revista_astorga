@@ -291,7 +291,7 @@ const restArticles = computed(() => articles.value.slice(5));
                 {{ mainArticle.title }}
               </router-link>
 
-              <p class="uppercase text-[10px] mt-1 font-extrabold tracking-[0.25em] text-[#B70041]">
+              <p class="uppercase text-[14px] mt-1  tracking-[0.25em] text-[#B70041]">
                 {{ mainArticle.category }}
               </p>
 
@@ -306,7 +306,7 @@ const restArticles = computed(() => articles.value.slice(5));
             <article
               v-for="article in secondaryArticles"
               :key="article.id"
-              class="border-b border-stone-300 pb-6 sm:pb-8"
+              class="border-b border-[#B70041]/30 pb-6 sm:pb-8"
             >
               <div class="grid grid-cols-2 sm:grid-cols-[220px_1fr] md:grid-cols-[240px_1fr] gap-4 sm:gap-5">
                 <img
@@ -320,7 +320,7 @@ const restArticles = computed(() => articles.value.slice(5));
                     :to="`/articulo/${article.slug}`" class="text-xl sm:text-2xl font-semibold leading-tight mt-2 hover:underline">
                     {{ article.title }}
                   </router-link>
-                  <p class="uppercase text-[10px] font-black tracking-[0.2em] mt-2 text-[#B70041]">
+                  <p class="uppercase text-[10px] tracking-[0.2em] mt-2 text-[#B70041]">
                     {{ article.category }}
                   </p>
 
