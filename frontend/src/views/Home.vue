@@ -302,7 +302,7 @@ const restArticles = computed(() => articles.value.slice(5));
           </article>
 
           <!-- NOTICIAS SECUNDARIAS -->
-          <div class="space-y-6 sm:space-y-8 border-t border-stone-300 pt-6 sm:pt-8">
+          <div class="space-y-6 sm:space-y-8 border-t border-[#B70041] pt-6 sm:pt-8">
             <article
               v-for="article in secondaryArticles"
               :key="article.id"
