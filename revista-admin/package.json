@@ -1,0 +1,39 @@
+{
+  "name": "revista-admin",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "scripts": {
+    "dev": "npm run _env:dev -- tsx watch index.ts",
+    "build": "npm run _env:prod -- tsup index.ts --format esm --clean",
+    "prod": "npm run _env:prod -- node dist/index.js",
+    "start": "npm run dev",
+    "makemigration": "npm run _env:dev -- npx --yes prisma migrate dev --create-only",
+    "migrate:local": "npm run _env:dev -- npx --yes prisma migrate deploy",
+    "migrate:prod": "npm run _env:prod -- npx --yes prisma migrate deploy",
+    "_env:dev": "dotenvx run -f .env -f .env.local --",
+    "_env:prod": "dotenvx run -f .env.prod --"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@dotenvx/dotenvx": "^1.34.0",
+    "adminforth": "latest",
+    "express": "latest-4",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "typescript": "6.0.3",
+    "tsup": "^8.5.1",
+    "tsx": "4.11.2",
+    "@types/express": "^4.17.21",
+    "@types/node": "latest",
+    "@prisma/client": "latest",
+    "prisma": "^7.0.0"
+  }
+}

@@ -1,11 +1,14 @@
 <script setup>
 import { ref, computed } from "vue";
+import { useRoute } from "vue-router";
 
 import {Smartphone, Newspaper, MessageSquareText, MessageSquareHeart, Share2, CircleUserRound} from 'lucide-vue-next'
 
 const menuOpen = ref(false);
 
-const articles = ref([
+const route = useRoute();
+
+const articles = [
   {
     id: 1,
     title: "Astorga prepara una gran agenda cultural para este verano",
@@ -89,17 +92,21 @@ const articles = ref([
       "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop",
     status: "published",
   },
-]);
+];
 
+const categoryName = computed(() => {
+  return route.params.slug
+    ? String(route.params.slug).replaceAll("-", " ")
+    : "Actualidad";
+});
 
-const mainArticle = computed(() => articles.value[0]);
-const secondaryArticles = computed(() => articles.value.slice(1, 5));
-const restArticles = computed(() => articles.value.slice(5));
+const mainArticle = computed(() => articles[0]);
+const listArticles = computed(() => articles.slice(1));
 </script>
 
 <template>
-  <main class="min-h-screen bg-white text-[#1a1a1a]">
-  <!-- MENU -->
+  <main class="min-h-screen bg-white text-[#111]">
+     <!-- MENU -->
 <header class=" flex flex-col justify-center items-center border-stone-300 bg-white sticky top-0 z-50">
     <nav
     class="bg-[#B70041] flex w-full  mx-auto px-6 py-1 items-center justify-center text-stone-500">
@@ -272,74 +279,119 @@ const restArticles = computed(() => articles.value.slice(5));
     </div>
 </header>
 
-      <!-- MAIN NEWS -->
-      <section v-if="mainArticle" class="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
-        <div class="flex flex-col gap-8 sm:gap-10">
+    <!-- PUBLICIDAD SUPERIOR -->
+    <section class="max-w-5xl mx-auto px-4 py-4">
+      <div class="border border-stone-200 bg-stone-50 h-28 flex items-center justify-center text-stone-400 text-xs uppercase tracking-[0.25em]">
+        Publicidad 970x250
+      </div>
+    </section>
 
-          <!-- PRINCIPAL -->
-          <article>
+    <!-- CONTENEDOR PRINCIPAL -->
+    <section class="max-w-5xl mx-auto px-4 pb-16 grid lg:grid-cols-[1fr_300px] gap-8">
+      <!-- COLUMNA IZQUIERDA -->
+      <div>
+        <div class="border-b-2 border-[#B70041] mb-5 flex items-center gap-2">
+          <span class="w-3 h-3 bg-[#B70041]"></span>
+          <h2 class="text-xl font-bold capitalize text-[#B70041]">
+            {{ categoryName }}
+          </h2>
+        </div>
+
+        <!-- NOTICIA PRINCIPAL -->
+        <article v-if="mainArticle" class="mb-8">
+          <router-link :to="`/articulo/${mainArticle.slug}`">
             <img
               :src="mainArticle.cover_image"
-              class="w-full h-64 sm:h-80 md:h-[450px] object-cover"
+              :alt="mainArticle.title"
+              class="w-full h-[320px] object-cover"
             />
 
-            <div class="mt-3">
+            <h3 class="text-2xl md:text-3xl font-black leading-tight mt-3 hover:underline">
+              {{ mainArticle.title }}
+            </h3>
+          </router-link>
+
+          <p class="text-xs uppercase text-[#B70041]  tracking-[0.2em] mt-2">
+            {{ mainArticle.category }}
+          </p>
+
+          <p class="text-stone-600 text-sm mt-2 leading-relaxed">
+            {{ mainArticle.excerpt }}
+          </p>
+        </article>
+
+        <!-- LISTA DE ARTÍCULOS -->
+        <div class="space-y-5">
+          <article
+            v-for="article in listArticles"
+            :key="article.id"
+            class="grid grid-cols-[120px_1fr] md:grid-cols-[180px_1fr] gap-4 border-b border-[#B70041]/30 pb-5"
+          >
+            <router-link :to="`/articulo/${article.slug}`">
+              <img
+                :src="article.cover_image"
+                :alt="article.title"
+                class="w-full h-24 md:h-32 object-cover "
+              />
+            </router-link>
+
+            <div>
               <router-link
-                :to="`/articulo/${mainArticle.slug}`"
-                class="block text-xl sm:text-3xl md:text-4xl font-black teading-relaxed text-justify hyphens-auto max-w-[65ch] hover:underline "
+                :to="`/articulo/${article.slug}`"
+                class="text-lg md:text-xl font-black leading-tight hover:underline"
               >
-                {{ mainArticle.title }}
+                {{ article.title }}
               </router-link>
 
-              <p class="uppercase text-[10px] mt-1 font-extrabold tracking-[0.25em] text-[#B70041]">
-                {{ mainArticle.category }}
+              <p class="text-xs uppercase text-[#B70041] tracking-[0.2em] mt-2">
+                {{ article.category }}
               </p>
 
-              <p class="text-stone-600 mt-1 teading-relaxed text-[12px] text-justify hyphens-auto max-w-[65ch]">
-                {{ mainArticle.excerpt }}
+              <p class="text-stone-600 text-sm mt-2 leading-relaxed line-clamp-3">
+                {{ article.excerpt }}
               </p>
             </div>
           </article>
+        </div>
+      </div>
 
-          <!-- NOTICIAS SECUNDARIAS -->
-          <div class="space-y-6 sm:space-y-8 border-t border-stone-300 pt-6 sm:pt-8">
-            <article
-              v-for="article in secondaryArticles"
-              :key="article.id"
-              class="border-b border-stone-300 pb-6 sm:pb-8"
-            >
-              <div class="grid grid-cols-2 sm:grid-cols-[220px_1fr] md:grid-cols-[240px_1fr] gap-4 sm:gap-5">
-                <img
-                  :src="article.cover_image"
-                  class="w-full h-48 sm:h-32 md:h-28 object-cover"
-                />
-
-                <div>
-               
-                  <router-link
-                    :to="`/articulo/${article.slug}`" class="text-xl sm:text-2xl font-semibold leading-tight mt-2 hover:underline">
-                    {{ article.title }}
-                  </router-link>
-                  <p class="uppercase text-[10px] font-black tracking-[0.2em] mt-2 text-[#B70041]">
-                    {{ article.category }}
-                  </p>
-
-
-                  <p class="text-sm text-stone-600 leading-relaxed mt-2">
-                    {{ article.excerpt }}
-                  </p>
-
-                </div>
-              </div>
-            </article>
+      <!-- SIDEBAR DERECHA -->
+      <aside class="hidden lg:block">
+        <div class="sticky top-20 space-y-6">
+          <div class="border border-stone-200 bg-stone-50 h-[300px] flex items-center justify-center text-stone-400 text-xs uppercase tracking-[0.25em]">
+            Publicidad 300x250
           </div>
 
+          <div>
+            <h3 class="font-bold border-b-2 border-[#B70041] text-[#B70041] pb-2 mb-3">
+              Lo más leído
+            </h3>
+
+            <ol class="space-y-4">
+              <li
+                v-for="(article, index) in articles.slice(0, 5)"
+                :key="article.id"
+                class="grid grid-cols-[30px_1fr] gap-3"
+              >
+                <span class="text-[#B70041] ">
+                  {{ index + 1 }}
+                </span>
+
+                <router-link
+                  :to="`/articulo/${article.slug}`"
+                  class="text-sm font-bold leading-tight hover:underline"
+                >
+                  {{ article.title }}
+                </router-link>
+              </li>
+            </ol>
+          </div>
+
+          <div class="border border-stone-200 bg-stone-50 h-[600px] flex items-center justify-center text-stone-400 text-xs uppercase tracking-[0.25em]">
+            Publicidad 300x600
+          </div>
         </div>
-      </section>
-
-      
-
-   
+      </aside>
+    </section>
   </main>
-  
 </template>
