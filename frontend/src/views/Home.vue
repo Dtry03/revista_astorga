@@ -112,7 +112,7 @@ const restArticles = computed(() => articles.value.slice(5));
 
   </nav>
 
-    <div class="bg-white w-full  mx-auto ">
+    <div class="bg-white w-full  mx-auto py-5">
 
     
 
@@ -129,7 +129,7 @@ const restArticles = computed(() => articles.value.slice(5));
       </button>
 
       </div>
-        <div class="flex  text-center  items-center justify-center md:gap-40">
+        <div class="flex  text-center  items-center justify-center md:gap-2">
           <img
             src="../assets/logo-imagen.png"
             alt="logo Horizonte León"
@@ -176,18 +176,18 @@ const restArticles = computed(() => articles.value.slice(5));
 
       <div
         v-if="menuOpen"
-        class="w-full bg-[#B70041]/10 my-2 "
+        class="lg:max-w-4xl w-full  my-2 "
       >
 
-        <nav class="flex flex-col justify-center items-center  w-full">
+        <nav class="flex flex-col justify-center items-center  ">
 
-          <p class="text-md md:text-md border-b text-[#B70041] font-bold border-[#B70041]  w-[99vw] py-2 text-center items-center  hover:text-[#B70041]">
+          <p class="text-md md:text-md border-b text-[#B70041] font-bold border-[#B70041]  lg:max-w-4xl w-full py-2 pl-5 items-center  hover:text-[#B70041]">
             Secciones
           </p>
           
              <router-link
             to ="/categoria/leon"
-            class="text-sm md:text-[16px] border-b border-[#B70041]/20 w-[99vw] py-2 text-center items-center  hover:text-[#B70041]"
+            class="text-sm md:text-[16px] border-b border-[#B70041]/20 lg:max-w-4xl w-full py-2 pl-5 items-center  hover:text-[#B70041]"
             @click="menuOpen = false"
           >
             León
@@ -195,7 +195,7 @@ const restArticles = computed(() => articles.value.slice(5));
 
           <router-link
             to ="/categoria/ponferrada"
-            class="text-sm md:text-[16px] border-b border-[#B70041]/20 w-[99vw] py-2 text-center items-center  hover:text-[#B70041]"
+            class="text-sm md:text-[16px] border-b border-[#B70041]/20 lg:max-w-4xl w-full py-2 pl-5 items-center  hover:text-[#B70041]"
             @click="menuOpen = false"
           >
             Ponferrada
@@ -203,7 +203,7 @@ const restArticles = computed(() => articles.value.slice(5));
 
           <router-link
             to ="/categoria/astorga"
-            class="text-sm md:text-[16px] border-b border-[#B70041]/20 w-[99vw] py-2 text-center items-center  hover:text-[#B70041]"
+            class="text-sm md:text-[16px] border-b border-[#B70041]/20 lg:max-w-4xl w-full py-2 pl-5 items-center  hover:text-[#B70041]"
             @click="menuOpen = false"
           >
             Astorga
@@ -211,7 +211,7 @@ const restArticles = computed(() => articles.value.slice(5));
 
           <router-link
             to ="/categoria/banneza"
-            class="text-sm md:text-[16px] border-b border-[#B70041]/20 w-[99vw] py-2 text-center items-center  hover:text-[#B70041]"
+            class="text-sm md:text-[16px] border-b border-[#B70041]/20 lg:max-w-4xl w-full py-2 pl-5 items-center  hover:text-[#B70041]"
             @click="menuOpen = false"
           >
             Bañeza
@@ -219,7 +219,7 @@ const restArticles = computed(() => articles.value.slice(5));
 
           <router-link
             to = "/categoria/deportes"
-            class="text-sm md:text-[16px] border-b border-[#B70041]/20 w-[99vw] py-2 text-center items-center  hover:text-[#B70041]"
+            class="text-sm md:text-[16px] border-b border-[#B70041]/20 lg:max-w-4xl w-full py-2 pl-5 items-center  hover:text-[#B70041]"
             @click="menuOpen = false"
           >
             Deportes
@@ -229,7 +229,7 @@ const restArticles = computed(() => articles.value.slice(5));
           
           <router-link
             to = "/categoria/motor"
-            class="text-sm md:text-[16px]  border-b border-[#B70041]/20 w-[99vw] py-2 text-center items-center   hover:text-[#B70041]"
+            class="text-sm md:text-[16px]  border-b border-[#B70041]/20 lg:max-w-4xl w-full py-2 pl-5 items-center   hover:text-[#B70041]"
             @click="menuOpen = false"
           >
             Motor
@@ -237,15 +237,15 @@ const restArticles = computed(() => articles.value.slice(5));
 
           <router-link
             to = "/categoria/zonaon"
-            class="text-sm md:text-[16px]  border-b border-[#B70041]/20 w-[99vw] py-2 text-center items-center  hover:text-[#B70041]"
+            class="text-sm md:text-[16px]  border-b border-[#B70041]/20 lg:max-w-4xl w-full py-2 pl-5 items-center  hover:text-[#B70041]"
             @click="menuOpen = false"
           >
-            ZonaON
+            Zona<span class=" font-bold">ON</span>
           </router-link>
 
              <router-link
             to ="/categoria/tendencias"
-            class="text-sm md:text-[16px]  border-b border-[#B70041]/20 w-[99vw] py-2 text-center items-center  hover:text-[#B70041]"
+            class="text-sm md:text-[16px]  border-b border-[#B70041]/20 lg:max-w-4xl w-full py-2 pl-5 items-center  hover:text-[#B70041]"
             @click="menuOpen = false"
           >
             #tendencias
@@ -253,7 +253,7 @@ const restArticles = computed(() => articles.value.slice(5));
 
                     <router-link
             to ="/categoria/tablon"
-            class="text-sm md:text-[16px]  border-b border-[#B70041]/20 w-[99vw] py-2 text-center  hover:text-[#B70041]"
+            class="text-sm md:text-[16px]  border-b border-[#B70041]/20 lg:max-w-4xl w-full py-2 pl-5  hover:text-[#B70041]"
             @click="menuOpen = false"
           >
             Tablón
