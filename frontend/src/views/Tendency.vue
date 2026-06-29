@@ -98,7 +98,7 @@ const articles = [
 const categoryName = computed(() => {
   return route.params.slug
     ? String(route.params.slug).replaceAll("-", " ")
-    : "Actualidad";
+    : "tendencias";
 });
 
 const mainArticle = computed(() => articles[0]);
@@ -106,10 +106,10 @@ const listArticles = computed(() => articles.slice(1));
 </script>
 
 <template>
-  <main class="min-h-screen bg-white text-[#111] overflow-x-hidden">
+  <main class="min-h-screen bg-[#08080D] text-white overflow-x-hidden">
     <!-- MENU -->
-    <header class="flex flex-col justify-center items-center border-stone-300 bg-white sticky top-0 z-50">
-      <nav class="bg-[#B70041] flex w-full mx-auto px-3 sm:px-6 py-1 items-center justify-center text-stone-500">
+    <header class="flex flex-col justify-center items-center border-[#281325] bg-[#0D0D14] sticky top-0 z-50">
+      <nav class="bg-[#B70041] flex w-full mx-auto px-3 sm:px-6 py-1 items-center justify-center overflow-hidden">
         <div class="flex w-full max-w-5xl justify-center gap-4 sm:gap-6 md:gap-16 text-white text-[12px] sm:text-[13px] md:text-[16px]">
           <a href="/categoria/leon" class="hover:underline whitespace-nowrap">León</a>
           <a href="/categoria/ponferrada" class="hover:underline whitespace-nowrap">Ponferrada</a>
@@ -118,57 +118,49 @@ const listArticles = computed(() => articles.slice(1));
         </div>
       </nav>
 
-      <div class="bg-white w-full mx-auto py-3 sm:py-5">
-        <div class="w-full max-w-5xl mx-auto grid grid-cols-[38px_1fr_38px] sm:grid-cols-[52px_1fr_52px] items-center px-3 sm:px-6">
+      <div class="bg-[#0D0D14] w-full mx-auto">
+        <div class="w-full max-w-5xl mx-auto grid grid-cols-[38px_minmax(0,1fr)_38px] sm:grid-cols-[56px_minmax(0,1fr)_56px] items-center px-3 sm:px-6 py-4 sm:py-5">
           <div class="flex items-center justify-start">
             <button
               @click="menuOpen = !menuOpen"
               class="flex flex-col gap-1.5"
               aria-label="Abrir menú"
             >
-              <span class="w-6 h-0.5 bg-[#B70041]"></span>
-              <span class="w-6 h-0.5 bg-[#B70041]"></span>
-              <span class="w-6 h-0.5 bg-[#B70041]"></span>
+              <span class="w-6 h-0.5 bg-[#FF2BD6]"></span>
+              <span class="w-6 h-0.5 bg-[#00F5FF]"></span>
+              <span class="w-6 h-0.5 bg-[#FF2BD6]"></span>
             </button>
           </div>
 
-          <div class="flex text-center items-center justify-center gap-1 sm:gap-2 min-w-0">
-            <img
-              src="../assets/logo-imagen.png"
-              alt="logo Horizonte León"
-              class="w-40 md:w-72 shrink-0"
-            />
-
-            <img
-              src="../assets/logo.png"
-              alt="logo Horizonte León"
-              class="w-40 md:w-60 shrink-0"
-            />
+          <div class="flex text-center items-center justify-center min-w-0">
+            <p class="text-2xl min-[380px]:text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-[#B70041] leading-none whitespace-nowrap">
+              #tendencias
+            </p>
           </div>
 
           <div class="flex justify-end items-center">
             <CircleUserRound
               :stroke-width="1.5"
-              class="w-7 h-7 sm:w-8 sm:h-8 text-[#B70041] hover:scale-105 transition"
+              class="w-7 h-7 sm:w-8 sm:h-8 text-[#00F5FF] hover:scale-105 transition shrink-0"
             />
           </div>
         </div>
       </div>
 
       <div class="flex justify-center items-center w-full max-w-5xl gap-3 sm:gap-5 text-white text-[13px] md:text-[16px] py-2 px-4 overflow-hidden">
-        <Smartphone class="w-4 sm:w-5 md:w-6 h-5 md:h-6 text-[#B70041] hover:scale-105 transition shrink-0" />
-        <hr class="border h-4 border-[#B70041] shrink-0" />
+        <Smartphone class="w-4 sm:w-5 md:w-6 h-5 md:h-6 text-[#00F5FF] hover:scale-105 transition shrink-0" />
+        <hr class="border h-4 border-[#FF2BD6] shrink-0" />
 
-        <Newspaper class="w-4 sm:w-5 md:w-6 h-5 md:h-6 text-[#B70041] hover:scale-105 transition shrink-0" />
-        <hr class="border h-4 border-[#B70041] shrink-0" />
+        <Newspaper class="w-4 sm:w-5 md:w-6 h-5 md:h-6 text-[#00F5FF] hover:scale-105 transition shrink-0" />
+        <hr class="border h-4 border-[#FF2BD6] shrink-0" />
 
-        <MessageSquareText class="w-4 sm:w-5 md:w-6 h-5 md:h-6 text-[#B70041] hover:scale-105 transition shrink-0" />
-        <hr class="border h-4 border-[#B70041] shrink-0" />
+        <MessageSquareText class="w-4 sm:w-5 md:w-6 h-5 md:h-6 text-[#00F5FF] hover:scale-105 transition shrink-0" />
+        <hr class="border h-4 border-[#FF2BD6] shrink-0" />
 
-        <MessageSquareHeart class="w-4 sm:w-5 md:w-6 h-5 md:h-6 text-[#B70041] hover:scale-105 transition shrink-0" />
-        <hr class="border h-4 border-[#B70041] shrink-0" />
+        <MessageSquareHeart class="w-4 sm:w-5 md:w-6 h-5 md:h-6 text-[#00F5FF] hover:scale-105 transition shrink-0" />
+        <hr class="border h-4 border-[#FF2BD6] shrink-0" />
 
-        <Share2 class="w-4 sm:w-5 md:w-6 h-5 md:h-6 text-[#B70041] hover:scale-105 transition shrink-0" />
+        <Share2 class="w-4 sm:w-5 md:w-6 h-5 md:h-6 text-[#00F5FF] hover:scale-105 transition shrink-0" />
       </div>
 
       <transition
@@ -181,16 +173,16 @@ const listArticles = computed(() => articles.slice(1));
       >
         <div
           v-if="menuOpen"
-          class="w-full bg-white border-t border-[#B70041]/20"
+          class="w-full bg-[#0D0D14] border-t border-[#281325]"
         >
           <nav class="flex flex-col justify-center items-center">
-            <p class="text-sm md:text-md border-b text-[#B70041] font-bold border-[#B70041]/40 lg:max-w-4xl w-full py-2 px-4">
+            <p class="text-sm md:text-md border-b text-[#00F5FF] font-bold border-[#FF2BD6]/40 lg:max-w-4xl w-full py-2 px-4">
               Secciones
             </p>
 
             <router-link
               to="/categoria/leon"
-              class="text-sm md:text-[16px] border-b border-[#B70041]/20 lg:max-w-4xl w-full py-2 px-4 hover:text-[#B70041]"
+              class="text-sm md:text-[16px] border-b border-[#FF2BD6]/20 lg:max-w-4xl w-full py-2 px-4 hover:text-[#FF2BD6] text-white"
               @click="menuOpen = false"
             >
               León
@@ -198,7 +190,7 @@ const listArticles = computed(() => articles.slice(1));
 
             <router-link
               to="/categoria/ponferrada"
-              class="text-sm md:text-[16px] border-b border-[#B70041]/20 lg:max-w-4xl w-full py-2 px-4 hover:text-[#B70041]"
+              class="text-sm md:text-[16px] border-b border-[#FF2BD6]/20 lg:max-w-4xl w-full py-2 px-4 hover:text-[#FF2BD6] text-white"
               @click="menuOpen = false"
             >
               Ponferrada
@@ -206,7 +198,7 @@ const listArticles = computed(() => articles.slice(1));
 
             <router-link
               to="/categoria/astorga"
-              class="text-sm md:text-[16px] border-b border-[#B70041]/20 lg:max-w-4xl w-full py-2 px-4 hover:text-[#B70041]"
+              class="text-sm md:text-[16px] border-b border-[#FF2BD6]/20 lg:max-w-4xl w-full py-2 px-4 hover:text-[#FF2BD6] text-white"
               @click="menuOpen = false"
             >
               Astorga
@@ -214,7 +206,7 @@ const listArticles = computed(() => articles.slice(1));
 
             <router-link
               to="/categoria/baneza"
-              class="text-sm md:text-[16px] border-b border-[#B70041]/20 lg:max-w-4xl w-full py-2 px-4 hover:text-[#B70041]"
+              class="text-sm md:text-[16px] border-b border-[#FF2BD6]/20 lg:max-w-4xl w-full py-2 px-4 hover:text-[#FF2BD6] text-white"
               @click="menuOpen = false"
             >
               Bañeza
@@ -222,7 +214,7 @@ const listArticles = computed(() => articles.slice(1));
 
             <router-link
               to="/categoria/deportes"
-              class="text-sm md:text-[16px] border-b border-[#B70041]/20 lg:max-w-4xl w-full py-2 px-4 hover:text-[#B70041]"
+              class="text-sm md:text-[16px] border-b border-[#FF2BD6]/20 lg:max-w-4xl w-full py-2 px-4 hover:text-[#FF2BD6] text-white"
               @click="menuOpen = false"
             >
               Deportes
@@ -230,7 +222,7 @@ const listArticles = computed(() => articles.slice(1));
 
             <router-link
               to="/categoria/motor"
-              class="text-sm md:text-[16px] border-b border-[#B70041]/20 lg:max-w-4xl w-full py-2 px-4 hover:text-[#B70041]"
+              class="text-sm md:text-[16px] border-b border-[#FF2BD6]/20 lg:max-w-4xl w-full py-2 px-4 hover:text-[#FF2BD6] text-white"
               @click="menuOpen = false"
             >
               Motor
@@ -238,7 +230,7 @@ const listArticles = computed(() => articles.slice(1));
 
             <router-link
               to="/zonaon/"
-              class="text-sm md:text-[16px] border-b border-[#B70041]/20 lg:max-w-4xl w-full py-2 px-4 hover:text-[#B70041]"
+              class="text-sm md:text-[16px] border-b border-[#FF2BD6]/20 lg:max-w-4xl w-full py-2 px-4 hover:text-[#FF2BD6] text-white"
               @click="menuOpen = false"
             >
               Zona<span class="font-bold">ON</span>
@@ -246,7 +238,7 @@ const listArticles = computed(() => articles.slice(1));
 
             <router-link
               to="/tendency/"
-              class="text-sm md:text-[16px] border-b border-[#B70041]/20 lg:max-w-4xl w-full py-2 px-4 hover:text-[#B70041]"
+              class="text-sm md:text-[16px] border-b border-[#FF2BD6]/20 lg:max-w-4xl w-full py-2 px-4  "
               @click="menuOpen = false"
             >
               #tendencias
@@ -254,7 +246,7 @@ const listArticles = computed(() => articles.slice(1));
 
             <router-link
               to="/categoria/tablon"
-              class="text-sm md:text-[16px] border-b border-[#B70041]/20 lg:max-w-4xl w-full py-2 px-4 hover:text-[#B70041]"
+              class="text-sm md:text-[16px] border-b border-[#FF2BD6]/20 lg:max-w-4xl w-full py-2 px-4 hover:text-[#FF2BD6] text-white"
               @click="menuOpen = false"
             >
               Tablón
@@ -264,9 +256,9 @@ const listArticles = computed(() => articles.slice(1));
       </transition>
 
       <div>
-        <p class="text-[8px] sm:text-[9px] md:text-[10px] py-2 px-3 text-center font-bold">
+        <p class="text-[8px] sm:text-[9px] md:text-[10px] py-2 px-3 text-center font-bold text-[#00F5FF]">
           INFORMACIÓN SIN LIMITES.
-          <span class="text-[#B70041]">CONECTAMOS CONTIGO</span>
+          <span class="text-[#FF2BD6]">CONECTAMOS CONTIGO</span>
         </p>
       </div>
     </header>
@@ -274,14 +266,14 @@ const listArticles = computed(() => articles.slice(1));
     <!-- PUBLICIDAD BILLBOARD 970x250 -->
     <section class="w-full px-3 sm:px-4 py-4 sm:py-5 overflow-hidden">
       <div class="max-w-[970px] mx-auto w-full">
-        <div class="w-full aspect-[970/250] min-h-[86px] sm:min-h-[110px] md:min-h-[120px] bg-stone-50 border border-stone-300 flex flex-col items-center justify-center text-stone-400 px-4 overflow-hidden">
+        <div class="w-full aspect-[970/250] min-h-[86px] sm:min-h-[110px] md:min-h-[120px] bg-[#12121C] border border-[#FF2BD6]/35 flex flex-col items-center justify-center text-[#C9D6FF] px-4 rounded-2xl overflow-hidden">
           <span class="text-[8px] sm:text-[10px] uppercase tracking-[0.22em] sm:tracking-[0.35em] mb-1 sm:mb-2">
             Publicidad
           </span>
-          <span class="text-lg sm:text-xl md:text-3xl font-light tracking-[0.12em] sm:tracking-[0.15em]">
+          <span class="text-lg sm:text-xl md:text-3xl font-light tracking-[0.12em] sm:tracking-[0.15em] text-[#00F5FF]">
             970 x 250
           </span>
-          <span class="text-[9px] sm:text-xs uppercase tracking-[0.18em] sm:tracking-[0.25em] mt-1">
+          <span class="text-[9px] sm:text-xs uppercase tracking-[0.18em] sm:tracking-[0.25em] mt-1 text-[#FF2BD6]">
             Billboard
           </span>
         </div>
@@ -292,61 +284,72 @@ const listArticles = computed(() => articles.slice(1));
     <section class="max-w-6xl mx-auto px-3 sm:px-4 pb-16 grid lg:grid-cols-[minmax(0,1fr)_300px] gap-8 overflow-hidden">
       <!-- COLUMNA IZQUIERDA -->
       <div class="min-w-0">
-        <div class="border-b-2 border-[#B70041] mb-5 flex items-center gap-2">
-          <span class="w-3 h-3 bg-[#B70041] shrink-0"></span>
-          <h2 class="text-lg sm:text-xl font-bold capitalize text-[#B70041] break-words">
-            {{ categoryName }}
+        <div class="border-b-2 border-[#FF2BD6] mb-5 flex items-center gap-2">
+          <span class="w-3 h-3 bg-[#00F5FF] shrink-0"></span>
+          <h2 class="text-lg sm:text-xl font-black capitalize text-white break-words">
+            #{{ categoryName }}
           </h2>
         </div>
 
         <!-- PUBLICIDAD LEADERBOARD 728x90 -->
         <div class="w-full flex justify-center mb-7 overflow-hidden">
-          <div class="w-full max-w-[728px] aspect-[728/90] min-h-[58px] sm:min-h-[70px] bg-stone-50 border border-stone-300 flex flex-col items-center justify-center text-stone-400 px-4 overflow-hidden">
+          <div class="w-full max-w-[728px] aspect-[728/90] min-h-[58px] sm:min-h-[70px] bg-[#12121C] border border-[#00F5FF]/35 flex flex-col items-center justify-center text-[#C9D6FF] px-4 rounded-2xl overflow-hidden">
             <span class="text-[8px] sm:text-[9px] uppercase tracking-[0.22em] sm:tracking-[0.35em] mb-1">
               Publicidad
             </span>
-            <span class="text-base sm:text-lg md:text-2xl font-light tracking-[0.12em] sm:tracking-[0.15em]">
+            <span class="text-base sm:text-lg md:text-2xl font-light tracking-[0.12em] sm:tracking-[0.15em] text-[#00F5FF]">
               728 x 90
             </span>
-            <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.18em] sm:tracking-[0.25em]">
+            <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.18em] sm:tracking-[0.25em] text-[#FF2BD6]">
               Leaderboard
             </span>
           </div>
         </div>
 
         <!-- NOTICIA PRINCIPAL -->
-        <article v-if="mainArticle" class="mb-8 min-w-0">
-          <router-link :to="`/articulo/${mainArticle.slug}`">
+        <article v-if="mainArticle" class="mb-8 overflow-hidden rounded-2xl sm:rounded-[28px] border border-[#FF2BD6]/35 bg-[#12121C] min-w-0">
+          <router-link :to="`/articulo/${mainArticle.slug}`" class="block">
             <img
               :src="mainArticle.cover_image"
               :alt="mainArticle.title"
-              class="w-full h-56 sm:h-72 md:h-[320px] object-cover"
+              class="w-full h-72 sm:h-[420px] md:h-[560px] object-cover"
             />
-
-            <h3 class="text-2xl sm:text-3xl md:text-3xl font-black leading-tight mt-3 hover:underline break-words">
-              {{ mainArticle.title }}
-            </h3>
           </router-link>
 
-          <p class="text-[10px] sm:text-xs uppercase text-[#B70041] tracking-[0.18em] sm:tracking-[0.2em] mt-2">
-            {{ mainArticle.category }}
-          </p>
+          <div class="p-4 sm:p-5 min-w-0">
+            <p class="text-[10px] sm:text-xs uppercase text-[#B70041] tracking-[0.18em] sm:tracking-[0.2em] mb-2 font-bold">
+              #tendencias
+            </p>
 
-          <p class="text-stone-600 text-sm sm:text-[15px] mt-2 leading-relaxed">
-            {{ mainArticle.excerpt }}
-          </p>
+            <router-link
+              :to="`/articulo/${mainArticle.slug}`"
+              class="block"
+            >
+              <h3 class="text-2xl sm:text-3xl md:text-3xl font-black leading-tight hover:underline text-white break-words">
+                {{ mainArticle.title }}
+              </h3>
+            </router-link>
+
+            <p class="text-[10px] sm:text-xs uppercase text-[#FF2BD6] tracking-[0.18em] sm:tracking-[0.2em] mt-2">
+              {{ mainArticle.category }}
+            </p>
+
+            <p class="text-[#C9D6FF] text-sm sm:text-[15px] mt-2 leading-relaxed">
+              {{ mainArticle.excerpt }}
+            </p>
+          </div>
         </article>
 
         <!-- PUBLICIDAD RECTÁNGULO 336x280 EN MÓVIL/TABLET -->
         <div class="lg:hidden w-full flex justify-center mb-8 overflow-hidden">
-          <div class="w-full max-w-[336px] aspect-[336/280] bg-stone-50 border border-stone-300 flex flex-col items-center justify-center text-stone-400 px-4 overflow-hidden">
+          <div class="w-full max-w-[336px] aspect-[336/280] bg-[#12121C] border border-[#FF2BD6]/35 flex flex-col items-center justify-center text-[#C9D6FF] px-4 rounded-2xl overflow-hidden">
             <span class="text-[8px] sm:text-[9px] uppercase tracking-[0.22em] sm:tracking-[0.35em] mb-1">
               Publicidad
             </span>
-            <span class="text-lg sm:text-xl font-light tracking-[0.12em] sm:tracking-[0.15em]">
+            <span class="text-lg sm:text-xl font-light tracking-[0.12em] sm:tracking-[0.15em] text-[#00F5FF]">
               336 x 280
             </span>
-            <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.18em] sm:tracking-[0.25em]">
+            <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.18em] sm:tracking-[0.25em] text-[#FF2BD6]">
               Rectángulo
             </span>
           </div>
@@ -358,28 +361,32 @@ const listArticles = computed(() => articles.slice(1));
             v-for="(article, index) in listArticles"
             :key="article.id"
           >
-            <article class="grid grid-cols-[96px_minmax(0,1fr)] sm:grid-cols-[130px_minmax(0,1fr)] md:grid-cols-[180px_minmax(0,1fr)] gap-3 sm:gap-4 border-b border-[#B70041]/30 pb-5 min-w-0">
-              <router-link :to="`/articulo/${article.slug}`" class="min-w-0">
+            <article class="overflow-hidden rounded-2xl sm:rounded-[28px] border border-[#2A1630] bg-[#12121C] min-w-0">
+              <router-link :to="`/articulo/${article.slug}`" class="block">
                 <img
                   :src="article.cover_image"
                   :alt="article.title"
-                  class="w-full h-24 sm:h-28 md:h-32 object-cover"
+                  class="w-full h-56 sm:h-72 md:h-96 object-cover"
                 />
               </router-link>
 
-              <div class="min-w-0">
+              <div class="p-4 sm:p-5 min-w-0">
+                <p class="text-[10px] sm:text-xs uppercase text-[#B70041] tracking-[0.18em] sm:tracking-[0.2em] mb-2 font-bold">
+                  #tendencias
+                </p>
+
                 <router-link
                   :to="`/articulo/${article.slug}`"
-                  class="block text-base sm:text-lg md:text-xl font-black leading-tight hover:underline break-words"
+                  class="text-xl md:text-2xl font-black leading-tight hover:underline text-white block break-words"
                 >
                   {{ article.title }}
                 </router-link>
 
-                <p class="text-[9px] sm:text-xs uppercase text-[#B70041] tracking-[0.16em] sm:tracking-[0.2em] mt-2">
+                <p class="text-[10px] sm:text-xs uppercase text-[#FF2BD6] tracking-[0.18em] sm:tracking-[0.2em] mt-2">
                   {{ article.category }}
                 </p>
 
-                <p class="text-stone-600 text-xs sm:text-sm mt-2 leading-relaxed line-clamp-2 sm:line-clamp-3">
+                <p class="text-[#C9D6FF] text-sm mt-2 leading-relaxed">
                   {{ article.excerpt }}
                 </p>
               </div>
@@ -390,14 +397,14 @@ const listArticles = computed(() => articles.slice(1));
               v-if="index === 1"
               class="w-full flex justify-center py-3 overflow-hidden"
             >
-              <div class="w-full max-w-[728px] aspect-[728/90] min-h-[58px] sm:min-h-[70px] bg-stone-50 border border-stone-300 flex flex-col items-center justify-center text-stone-400 px-4 overflow-hidden">
+              <div class="w-full max-w-[728px] aspect-[728/90] min-h-[58px] sm:min-h-[70px] bg-[#12121C] border border-[#00F5FF]/35 flex flex-col items-center justify-center text-[#C9D6FF] px-4 rounded-2xl overflow-hidden">
                 <span class="text-[8px] sm:text-[9px] uppercase tracking-[0.22em] sm:tracking-[0.35em] mb-1">
                   Publicidad
                 </span>
-                <span class="text-base sm:text-lg md:text-2xl font-light tracking-[0.12em] sm:tracking-[0.15em]">
+                <span class="text-base sm:text-lg md:text-2xl font-light tracking-[0.12em] sm:tracking-[0.15em] text-[#00F5FF]">
                   728 x 90
                 </span>
-                <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.18em] sm:tracking-[0.25em]">
+                <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.18em] sm:tracking-[0.25em] text-[#FF2BD6]">
                   Leaderboard
                 </span>
               </div>
@@ -408,11 +415,11 @@ const listArticles = computed(() => articles.slice(1));
               v-if="index === 3"
               class="w-full flex justify-center py-4 overflow-hidden"
             >
-              <div class="w-full max-w-[336px] aspect-[336/280] bg-stone-50 border border-stone-300 flex flex-col items-center justify-center text-stone-400 px-4 overflow-hidden">
+              <div class="w-full max-w-[336px] aspect-[336/280] bg-[#12121C] border border-[#FF2BD6]/35 flex flex-col items-center justify-center text-[#C9D6FF] px-4 rounded-2xl overflow-hidden">
                 <span class="text-[8px] sm:text-[9px] uppercase tracking-[0.22em] sm:tracking-[0.35em] mb-1">
                   Publicidad
                 </span>
-                <span class="text-lg sm:text-xl font-light tracking-[0.12em] sm:tracking-[0.15em]">
+                <span class="text-lg sm:text-xl font-light tracking-[0.12em] sm:tracking-[0.15em] text-[#00F5FF]">
                   336 x 280
                 </span>
                 <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.18em] sm:tracking-[0.25em]">
@@ -428,21 +435,21 @@ const listArticles = computed(() => articles.slice(1));
       <aside class="hidden lg:block">
         <div class="sticky top-40 space-y-7">
           <!-- PUBLICIDAD 300x250 ROBAPÁGINAS -->
-          <div class="w-[300px] h-[250px] bg-stone-50 border border-stone-300 flex flex-col items-center justify-center text-stone-400">
+          <div class="w-[300px] h-[250px] bg-[#12121C] border border-[#FF2BD6]/35 flex flex-col items-center justify-center text-[#C9D6FF] rounded-2xl">
             <span class="text-[9px] uppercase tracking-[0.35em] mb-1">
               Publicidad
             </span>
-            <span class="text-2xl font-light tracking-[0.15em]">
+            <span class="text-2xl font-light tracking-[0.15em] text-[#00F5FF]">
               300 x 250
             </span>
-            <span class="text-[10px] uppercase tracking-[0.25em]">
+            <span class="text-[10px] uppercase tracking-[0.25em] text-[#FF2BD6]">
               Robapáginas
             </span>
           </div>
 
           <!-- LO MÁS LEÍDO -->
           <div>
-            <h3 class="font-bold border-b-2 border-[#B70041] text-[#B70041] pb-2 mb-3">
+            <h3 class="font-bold border-b-2 border-[#FF2BD6] text-[#FF2BD6] pb-2 mb-3">
               Lo más leído
             </h3>
 
@@ -452,13 +459,13 @@ const listArticles = computed(() => articles.slice(1));
                 :key="article.id"
                 class="grid grid-cols-[30px_minmax(0,1fr)] gap-3"
               >
-                <span class="text-[#B70041] font-black">
+                <span class="text-[#00F5FF] font-black">
                   {{ index + 1 }}
                 </span>
 
                 <router-link
                   :to="`/articulo/${article.slug}`"
-                  class="text-sm font-bold leading-tight hover:underline break-words"
+                  class="text-sm font-bold leading-tight hover:underline text-white break-words"
                 >
                   {{ article.title }}
                 </router-link>
@@ -467,11 +474,11 @@ const listArticles = computed(() => articles.slice(1));
           </div>
 
           <!-- PUBLICIDAD 300x600 HALF PAGE -->
-          <div class="w-[300px] h-[600px] bg-stone-50 border border-stone-300 flex flex-col items-center justify-center text-stone-400">
+          <div class="w-[300px] h-[600px] bg-[#12121C] border border-[#00F5FF]/35 flex flex-col items-center justify-center text-[#C9D6FF] rounded-2xl">
             <span class="text-[9px] uppercase tracking-[0.35em] mb-1">
               Publicidad
             </span>
-            <span class="text-2xl font-light tracking-[0.15em]">
+            <span class="text-2xl font-light tracking-[0.15em] text-[#00F5FF]">
               300 x 600
             </span>
             <span class="text-[10px] uppercase tracking-[0.25em]">

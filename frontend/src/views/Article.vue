@@ -2,8 +2,14 @@
 import { ref, computed } from "vue";
 import { useRoute } from "vue-router";
 
-import {Smartphone, Newspaper, MessageSquareText, MessageSquareHeart, Share2, CircleUserRound} from 'lucide-vue-next'
-
+import {
+  Smartphone,
+  Newspaper,
+  MessageSquareText,
+  MessageSquareHeart,
+  Share2,
+  CircleUserRound,
+} from "lucide-vue-next";
 
 const menuOpen = ref(false);
 
@@ -59,210 +65,217 @@ const article = computed(() => {
 const relatedArticles = computed(() => {
   return articles.filter((item) => item.slug !== article.value.slug);
 });
+
+const articleParagraphs = [
+  "Astorga afronta los próximos meses con una programación cultural pensada para vecinos, visitantes y negocios locales. La ciudad busca reforzar su actividad con propuestas culturales, gastronómicas y turísticas.",
+  "La iniciativa pretende generar movimiento en el centro urbano, aumentar la presencia de visitantes y mejorar la conexión entre la vida cultural y el comercio de proximidad.",
+  "Según fuentes cercanas a la organización, la agenda se irá completando durante las próximas semanas con nuevos actos, actividades familiares y eventos al aire libre.",
+  "El objetivo principal es convertir la actividad cultural en una herramienta útil para dinamizar la ciudad y dar mayor visibilidad a los negocios locales.",
+  "Este tipo de programación permite mantener viva la actividad durante más meses del año, no solo en fechas concretas o temporadas de mayor afluencia turística.",
+  "La respuesta de los negocios locales será clave para medir el impacto real de estas iniciativas en la actividad comercial de la ciudad.",
+];
 </script>
 
 <template>
-  <main class="min-h-screen bg-white text-[#111]">
-<header class=" flex flex-col justify-center items-center border-stone-300 bg-white sticky top-0 z-50">
-    <nav
-    class="bg-[#B70041] flex w-full  mx-auto px-6 py-1 items-center justify-center text-stone-500">
-    <div class="flex max-w-5xl gap-5 md:gap-15 text-white md:text-[16px] text-[13px]">
-    <a href="/categoria/leon" class="hover:underline">León</a>
-    <a href="/categoria/ponferrada" class="hover:underline">Ponferrada</a> 
-    <a href="/categoria/astorga" class="hover:underline">Astorga</a>
-    <a href="/categoria/banneza" class="hover:underline">Bañeza</a>
-    </div>
+  <main class="min-h-screen bg-white text-[#111] overflow-x-hidden">
+    <!-- MENU -->
+    <header class="flex flex-col justify-center items-center border-stone-300 bg-white sticky top-0 z-50">
+      <nav class="bg-[#B70041] flex w-full mx-auto px-3 sm:px-6 py-1 items-center justify-center overflow-hidden">
+        <div class="flex w-full max-w-5xl justify-center gap-4 sm:gap-6 md:gap-16 text-white text-[12px] sm:text-[13px] md:text-[16px]">
+          <a href="/categoria/leon" class="hover:underline whitespace-nowrap">León</a>
+          <a href="/categoria/ponferrada" class="hover:underline whitespace-nowrap">Ponferrada</a>
+          <a href="/categoria/astorga" class="hover:underline whitespace-nowrap">Astorga</a>
+          <a href="/categoria/baneza" class="hover:underline whitespace-nowrap">Bañeza</a>
+        </div>
+      </nav>
 
-  </nav>
+      <div class="bg-white w-full mx-auto py-3 sm:py-5">
+        <div class="w-full max-w-5xl mx-auto grid grid-cols-[38px_minmax(0,1fr)_38px] sm:grid-cols-[52px_minmax(0,1fr)_52px] items-center px-3 sm:px-6">
+          <div class="flex items-center justify-start">
+            <button
+              @click="menuOpen = !menuOpen"
+              class="flex flex-col gap-1.5"
+              aria-label="Abrir menú"
+            >
+              <span class="w-6 h-0.5 bg-[#B70041]"></span>
+              <span class="w-6 h-0.5 bg-[#B70041]"></span>
+              <span class="w-6 h-0.5 bg-[#B70041]"></span>
+            </button>
+          </div>
 
-    <div class="bg-white w-full  mx-auto ">
-
-    
-
-      <!-- LOGO -->
-      <div class="flex items-center justify-center gap-5 md:gap-40 mx-5 ">
-       <div class="flex items-center justify-center mr-8">  
-      <button
-        @click="menuOpen = !menuOpen"
-        class="flex flex-col gap-1.5"
-      >
-        <span class="w-6 h-0.5 bg-[#B70041]"></span>
-        <span class="w-6 h-0.5 bg-[#B70041]"></span>
-        <span class="w-6 h-0.5 bg-[#B70041]"></span>
-      </button>
-
-      </div>
-        <div class="flex  text-center  items-center justify-center md:gap-2">
-          <img
-            src="../assets/logo-imagen.png"
-            alt="logo Horizonte León"
-            class="w-36  md:w-70 "
-          />
+          <div class="flex text-center items-center justify-center gap-1 sm:gap-2 min-w-0">
+            <img
+              src="../assets/logo-imagen.png"
+              alt="logo Horizonte León"
+              class="w-40  md:w-72 shrink-0"
+            />
 
             <img
-            src="../assets/logo.png"
-            alt="logo Horizonte León"
-            class="w-36  md:w-60 "
-          />
-        </div>
-        <div class="flex justify-center items-center ml-12">
-          <CircleUserRound  :stroke-width="1.5" class="w-8 h-8  text-[#B70041] hover:scale-105 transition" />
-        </div>
+              src="../assets/logo.png"
+              alt="logo Horizonte León"
+              class="w-40  md:w-60 shrink-0"
+            />
+          </div>
 
-             
-
-     
+          <div class="flex justify-end items-center">
+            <CircleUserRound
+              :stroke-width="1.5"
+              class="w-7 h-7 sm:w-8 sm:h-8 text-[#B70041] hover:scale-105 transition shrink-0"
+            />
+          </div>
+        </div>
       </div>
-       </div>
 
+      <div class="flex justify-center items-center w-full max-w-5xl gap-3 sm:gap-5 text-white text-[13px] md:text-[16px] py-2 px-4 overflow-hidden">
+        <Smartphone class="w-4 sm:w-5 md:w-6 h-5 md:h-6 text-[#B70041] hover:scale-105 transition shrink-0" />
+        <hr class="border h-4 border-[#B70041] shrink-0" />
 
-    <div class="flex justify-center items-center max-w-5xl gap-5 md:gap-5 text-white md:text-[16px] text-[13px] border-r  ">
-          <Smartphone class="w-4 md:w-6 h-6 text-[#B70041] hover:scale-105 transition" />
-          <hr class="border h-4 border-[#B70041]">
-          <Newspaper class="w-4 md:w-6 h-6 text-[#B70041] hover:scale-105 transition"  />
-          <hr class="border h-4 border-[#B70041]">
-          <MessageSquareText class="w-4 md:w-6 h-6 text-[#B70041] hover:scale-105 transition" />
-          <hr class="border h-4 border-[#B70041]">
-          <MessageSquareHeart class="w-4 md:w-6 h-6 text-[#B70041] hover:scale-105 transition" />
-          <hr class="border h-4 border-[#B70041]">
-          <Share2 class="w-4 md:w-6 h-6 text-[#B70041] hover:scale-105 transition" />
+        <Newspaper class="w-4 sm:w-5 md:w-6 h-5 md:h-6 text-[#B70041] hover:scale-105 transition shrink-0" />
+        <hr class="border h-4 border-[#B70041] shrink-0" />
 
-    </div>
-     <transition
-      enter-active-class="transition duration-300 ease-out"
-      enter-from-class="opacity-0 -translate-y-4"
-      enter-to-class="opacity-100 translate-y-0"
-      leave-active-class="transition duration-200 ease-in"
-      leave-from-class="opacity-100 translate-y-0"
-      leave-to-class="opacity-0 -translate-y-4"
-    >
+        <MessageSquareText class="w-4 sm:w-5 md:w-6 h-5 md:h-6 text-[#B70041] hover:scale-105 transition shrink-0" />
+        <hr class="border h-4 border-[#B70041] shrink-0" />
 
-     <div
-        v-if="menuOpen"
-        class="lg:max-w-4xl w-full  my-2 "
+        <MessageSquareHeart class="w-4 sm:w-5 md:w-6 h-5 md:h-6 text-[#B70041] hover:scale-105 transition shrink-0" />
+        <hr class="border h-4 border-[#B70041] shrink-0" />
+
+        <Share2 class="w-4 sm:w-5 md:w-6 h-5 md:h-6 text-[#B70041] hover:scale-105 transition shrink-0" />
+      </div>
+
+      <transition
+        enter-active-class="transition duration-300 ease-out"
+        enter-from-class="opacity-0 -translate-y-4"
+        enter-to-class="opacity-100 translate-y-0"
+        leave-active-class="transition duration-200 ease-in"
+        leave-from-class="opacity-100 translate-y-0"
+        leave-to-class="opacity-0 -translate-y-4"
       >
+        <div
+          v-if="menuOpen"
+          class="w-full bg-white border-t border-[#B70041]/20"
+        >
+          <nav class="flex flex-col justify-center items-center">
+            <p class="text-sm md:text-md border-b text-[#B70041] font-bold border-[#B70041]/40 lg:max-w-4xl w-full py-2 px-4">
+              Secciones
+            </p>
 
-        <nav class="flex flex-col justify-center items-center  ">
+            <router-link
+              to="/categoria/leon"
+              class="text-sm md:text-[16px] border-b border-[#B70041]/20 lg:max-w-4xl w-full py-2 px-4 hover:text-[#B70041]"
+              @click="menuOpen = false"
+            >
+              León
+            </router-link>
 
-          <p class="text-md md:text-md border-b text-[#B70041] font-bold border-[#B70041]  lg:max-w-4xl w-full py-2 pl-5 items-center  hover:text-[#B70041]">
-            Secciones
-          </p>
-          
-             <router-link
-            to ="/categoria/leon"
-            class="text-sm md:text-[16px] border-b border-[#B70041]/20 lg:max-w-4xl w-full py-2 pl-5 items-center  hover:text-[#B70041]"
-            @click="menuOpen = false"
-          >
-            León
-          </router-link>
+            <router-link
+              to="/categoria/ponferrada"
+              class="text-sm md:text-[16px] border-b border-[#B70041]/20 lg:max-w-4xl w-full py-2 px-4 hover:text-[#B70041]"
+              @click="menuOpen = false"
+            >
+              Ponferrada
+            </router-link>
 
-          <router-link
-            to ="/categoria/ponferrada"
-            class="text-sm md:text-[16px] border-b border-[#B70041]/20 lg:max-w-4xl w-full py-2 pl-5 items-center  hover:text-[#B70041]"
-            @click="menuOpen = false"
-          >
-            Ponferrada
-          </router-link>
+            <router-link
+              to="/categoria/astorga"
+              class="text-sm md:text-[16px] border-b border-[#B70041]/20 lg:max-w-4xl w-full py-2 px-4 hover:text-[#B70041]"
+              @click="menuOpen = false"
+            >
+              Astorga
+            </router-link>
 
-          <router-link
-            to ="/categoria/astorga"
-            class="text-sm md:text-[16px] border-b border-[#B70041]/20 lg:max-w-4xl w-full py-2 pl-5 items-center  hover:text-[#B70041]"
-            @click="menuOpen = false"
-          >
-            Astorga
-          </router-link>
+            <router-link
+              to="/categoria/baneza"
+              class="text-sm md:text-[16px] border-b border-[#B70041]/20 lg:max-w-4xl w-full py-2 px-4 hover:text-[#B70041]"
+              @click="menuOpen = false"
+            >
+              Bañeza
+            </router-link>
 
-          <router-link
-            to ="/categoria/banneza"
-            class="text-sm md:text-[16px] border-b border-[#B70041]/20 lg:max-w-4xl w-full py-2 pl-5 items-center  hover:text-[#B70041]"
-            @click="menuOpen = false"
-          >
-            Bañeza
-          </router-link>
+            <router-link
+              to="/categoria/deportes"
+              class="text-sm md:text-[16px] border-b border-[#B70041]/20 lg:max-w-4xl w-full py-2 px-4 hover:text-[#B70041]"
+              @click="menuOpen = false"
+            >
+              Deportes
+            </router-link>
 
-          <router-link
-            to = "/categoria/deportes"
-            class="text-sm md:text-[16px] border-b border-[#B70041]/20 lg:max-w-4xl w-full py-2 pl-5 items-center  hover:text-[#B70041]"
-            @click="menuOpen = false"
-          >
-            Deportes
-          </router-link>
+            <router-link
+              to="/categoria/motor"
+              class="text-sm md:text-[16px] border-b border-[#B70041]/20 lg:max-w-4xl w-full py-2 px-4 hover:text-[#B70041]"
+              @click="menuOpen = false"
+            >
+              Motor
+            </router-link>
 
-        
-          
-          <router-link
-            to = "/categoria/motor"
-            class="text-sm md:text-[16px]  border-b border-[#B70041]/20 lg:max-w-4xl w-full py-2 pl-5 items-center   hover:text-[#B70041]"
-            @click="menuOpen = false"
-          >
-            Motor
-          </router-link>
+            <router-link
+              to="/zonaon/"
+              class="text-sm md:text-[16px] border-b border-[#B70041]/20 lg:max-w-4xl w-full py-2 px-4 hover:text-[#B70041]"
+              @click="menuOpen = false"
+            >
+              Zona<span class="font-bold">ON</span>
+            </router-link>
 
-          <router-link
-            to = "/categoria/zonaon"
-            class="text-sm md:text-[16px]  border-b border-[#B70041]/20 lg:max-w-4xl w-full py-2 pl-5 items-center  hover:text-[#B70041]"
-            @click="menuOpen = false"
-          >
-            Zona<span class=" font-bold">ON</span>
-          </router-link>
+            <router-link
+              to="/tendency/"
+              class="text-sm md:text-[16px] border-b border-[#B70041]/20 lg:max-w-4xl w-full py-2 px-4 hover:text-[#B70041]"
+              @click="menuOpen = false"
+            >
+              #tendencias
+            </router-link>
 
-             <router-link
-            to ="/categoria/tendencias"
-            class="text-sm md:text-[16px]  border-b border-[#B70041]/20 lg:max-w-4xl w-full py-2 pl-5 items-center  hover:text-[#B70041]"
-            @click="menuOpen = false"
-          >
-            #tendencias
-          </router-link>
+            <router-link
+              to="/categoria/tablon"
+              class="text-sm md:text-[16px] border-b border-[#B70041]/20 lg:max-w-4xl w-full py-2 px-4 hover:text-[#B70041]"
+              @click="menuOpen = false"
+            >
+              Tablón
+            </router-link>
+          </nav>
+        </div>
+      </transition>
 
-                    <router-link
-            to ="/categoria/tablon"
-            class="text-sm md:text-[16px]  border-b border-[#B70041]/20 lg:max-w-4xl w-full py-2 pl-5  hover:text-[#B70041]"
-            @click="menuOpen = false"
-          >
-            Tablón
-          </router-link>
-
-
-
-
-        </nav>
-
+      <div>
+        <p class="text-[8px] sm:text-[9px] md:text-[10px] py-2 px-3 text-center font-bold">
+          INFORMACIÓN SIN LIMITES.
+          <span class="text-[#B70041]">CONECTAMOS CONTIGO</span>
+        </p>
       </div>
+    </header>
 
-
-
-       
-
-    </transition>
-    <div>
-      <p class=" text-[9px] md:text-[10px] py-2 font-bold">INFORMACIÓN SIN LIMITES.<span class="text-[#B70041]"> CONECTAMOS CONTIGO</span> </p>
-    </div>
-</header>
-
-    <!-- PUBLICIDAD SUPERIOR -->
-    <section class="max-w-[1040px] mx-auto px-4 py-3">
-      <div class="h-[90px] bg-stone-50 border border-stone-200 flex items-center justify-center text-[11px] text-stone-400 uppercase tracking-[0.25em]">
-        Publicidad superior 970x90
+    <!-- PUBLICIDAD BILLBOARD 970x250 -->
+    <section class="w-full px-3 sm:px-4 py-4 sm:py-5 overflow-hidden">
+      <div class="max-w-[970px] mx-auto w-full">
+        <div class="w-full aspect-[970/250] min-h-[86px] sm:min-h-[110px] md:min-h-[120px] bg-stone-50 border border-stone-300 flex flex-col items-center justify-center text-stone-400 px-4 overflow-hidden">
+          <span class="text-[8px] sm:text-[10px] uppercase tracking-[0.22em] sm:tracking-[0.35em] mb-1 sm:mb-2">
+            Publicidad
+          </span>
+          <span class="text-lg sm:text-xl md:text-3xl font-light tracking-[0.12em] sm:tracking-[0.15em]">
+            970 x 250
+          </span>
+          <span class="text-[9px] sm:text-xs uppercase tracking-[0.18em] sm:tracking-[0.25em] mt-1">
+            Billboard
+          </span>
+        </div>
       </div>
     </section>
 
     <!-- LAYOUT PRINCIPAL -->
-    <section class="max-w-[1040px] mx-auto px-4 grid lg:grid-cols-[680px_300px] gap-8">
+    <section class="max-w-6xl mx-auto px-3 sm:px-4 grid lg:grid-cols-[minmax(0,1fr)_300px] gap-8 overflow-hidden">
       <!-- ARTÍCULO -->
-      <article>
-        <p class="uppercase text-[15px] tracking-[0.2em]  text-[#B70041]">
+      <article class="w-full max-w-[760px] min-w-0">
+        <p class="uppercase text-[12px] sm:text-[15px] tracking-[0.18em] sm:tracking-[0.2em] text-[#B70041]">
           {{ article.category }}
         </p>
 
-        <h1 class="text-[30px] md:text-[42px] leading-[1.05] font-black mt-2">
+        <h1 class="text-[28px] sm:text-[36px] md:text-[44px] leading-[1.05] font-black mt-2 break-words">
           {{ article.title }}
         </h1>
 
-        <p class="text-[17px] md:text-[19px] text-stone-600 leading-relaxed mt-3">
+        <p class="text-[16px] sm:text-[17px] md:text-[20px] text-stone-600 leading-relaxed mt-3">
           {{ article.excerpt }}
         </p>
 
-        <div class="flex items-center gap-3 text-[12px] text-stone-500 mt-4">
+        <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-[12px] text-stone-500 mt-4">
           <span>Redacción</span>
           <span>•</span>
           <span>Astorga</span>
@@ -270,95 +283,153 @@ const relatedArticles = computed(() => {
           <span>Actualizado hoy</span>
         </div>
 
-        <div class="flex gap-2 mt-4">
-          <span class=" w-6 h-6 rounded-full transition hover:scale-105 bg-blue-600 flex justify-center items-center"><a href="" class="fa-brands fa-facebook-f text-white"></a></span>
-          <span class="w-6 h-6 rounded-full transition hover:scale-105 bg-pink-500 flex justify-center items-center"><a href="" class="fa-brands fa-instagram text-white"></a></span>
-          <span class="w-6 h-6 rounded-full transition hover:scale-105 bg-green-600 flex justify-center items-center"><a href="" class="fa-brands fa-whatsapp text-white"></a></span>
-          <span class="w-6 h-6 rounded-full transition hover:scale-105 bg-stone-800 flex justify-center items-center"><a href="" class="fa-brands fa-x-twitter text-white"></a></span>
+        <div class="flex flex-wrap gap-2 mt-4">
+          <span class="w-7 h-7 sm:w-6 sm:h-6 rounded-full transition hover:scale-105 bg-blue-600 flex justify-center items-center">
+            <a href="#" class="fa-brands fa-facebook-f text-white"></a>
+          </span>
+
+          <span class="w-7 h-7 sm:w-6 sm:h-6 rounded-full transition hover:scale-105 bg-pink-500 flex justify-center items-center">
+            <a href="#" class="fa-brands fa-instagram text-white"></a>
+          </span>
+
+          <span class="w-7 h-7 sm:w-6 sm:h-6 rounded-full transition hover:scale-105 bg-green-600 flex justify-center items-center">
+            <a href="#" class="fa-brands fa-whatsapp text-white"></a>
+          </span>
+
+          <span class="w-7 h-7 sm:w-6 sm:h-6 rounded-full transition hover:scale-105 bg-stone-800 flex justify-center items-center">
+            <a href="#" class="fa-brands fa-x-twitter text-white"></a>
+          </span>
+        </div>
+
+        <!-- PUBLICIDAD LEADERBOARD 728x90 -->
+        <div class="w-full flex justify-center my-6 overflow-hidden">
+          <div class="w-full max-w-[728px] aspect-[728/90] min-h-[58px] sm:min-h-[70px] bg-stone-50 border border-stone-300 flex flex-col items-center justify-center text-stone-400 px-4 overflow-hidden">
+            <span class="text-[8px] sm:text-[9px] uppercase tracking-[0.22em] sm:tracking-[0.35em] mb-1">
+              Publicidad
+            </span>
+            <span class="text-base sm:text-lg md:text-2xl font-light tracking-[0.12em] sm:tracking-[0.15em]">
+              728 x 90
+            </span>
+            <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.18em] sm:tracking-[0.25em]">
+              Leaderboard
+            </span>
+          </div>
         </div>
 
         <img
           :src="article.cover_image"
           :alt="article.title"
-          class="w-full h-[360px] md:h-[460px] object-cover mt-5"
+          class="w-full h-64 sm:h-[360px] md:h-[460px] object-cover mt-5"
         />
 
         <p class="text-[11px] text-stone-500 mt-1">
           Imagen principal de la información.
         </p>
 
-        <!-- CUERPO -->
-        <div class="mt-7 grid md:grid-cols-[1fr_250px] gap-6">
-          <div class="text-[16px] leading-[1.85] text-stone-800 space-y-5">
-            <p>
-              Astorga afronta los próximos meses con una programación cultural pensada para vecinos,
-              visitantes y negocios locales. La ciudad busca reforzar su actividad con propuestas
-              culturales, gastronómicas y turísticas.
-            </p>
-
-            <p>
-              La iniciativa pretende generar movimiento en el centro urbano, aumentar la presencia de
-              visitantes y mejorar la conexión entre la vida cultural y el comercio de proximidad.
-            </p>
-
-            <!-- AD INTERIOR -->
-            <div class="md:hidden h-[250px] border border-stone-200 bg-stone-50 flex items-center justify-center text-stone-400 text-[11px] uppercase tracking-[0.2em]">
-              Publicidad 300x250
-            </div>
-
-            <p>
-              Según fuentes cercanas a la organización, la agenda se irá completando durante las
-              próximas semanas con nuevos actos, actividades familiares y eventos al aire libre.
-            </p>
-
-            <p>
-              El objetivo principal es convertir la actividad cultural en una herramienta útil para
-              dinamizar la ciudad y dar mayor visibilidad a los negocios locales.
-            </p>
-
-            <div class="h-[250px] border border-stone-200 bg-stone-50 flex items-center justify-center text-stone-400 text-[11px] uppercase tracking-[0.2em]">
-              Publicidad integrada 300x250
-            </div>
-
-            <p>
-              Este tipo de programación permite mantener viva la actividad durante más meses del año,
-              no solo en fechas concretas o temporadas de mayor afluencia turística.
-            </p>
-
-            <p>
-              La respuesta de los negocios locales será clave para medir el impacto real de estas
-              iniciativas en la actividad comercial de la ciudad.
-            </p>
+        <!-- PUBLICIDAD RECTÁNGULO MÓVIL 336x280 -->
+        <div class="lg:hidden w-full flex justify-center my-7 overflow-hidden">
+          <div class="w-full max-w-[336px] aspect-[336/280] bg-stone-50 border border-stone-300 flex flex-col items-center justify-center text-stone-400 px-4 overflow-hidden">
+            <span class="text-[8px] sm:text-[9px] uppercase tracking-[0.22em] sm:tracking-[0.35em] mb-1">
+              Publicidad
+            </span>
+            <span class="text-lg sm:text-xl font-light tracking-[0.12em] sm:tracking-[0.15em]">
+              336 x 280
+            </span>
+            <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.18em] sm:tracking-[0.25em]">
+              Rectángulo
+            </span>
           </div>
+        </div>
 
-          <!-- AD DENTRO DEL CUERPO -->
-          <aside class="hidden md:block space-y-5">
-            <div class="h-[300px] border border-stone-200 bg-stone-50 flex items-center justify-center text-stone-400 text-[11px] uppercase tracking-[0.2em]">
-              Publicidad 250x300
+        <!-- CUERPO -->
+        <div class="mt-7 text-[16px] md:text-[17px] leading-[1.85] md:leading-[1.9] text-stone-800 space-y-5 min-w-0">
+          <template
+            v-for="(paragraph, index) in articleParagraphs"
+            :key="index"
+          >
+            <p>
+              {{ paragraph }}
+            </p>
+
+            <!-- PUBLICIDAD 336x280 DESPUÉS DEL SEGUNDO PÁRRAFO -->
+            <div
+              v-if="index === 1"
+              class="w-full flex justify-center py-5 overflow-hidden"
+            >
+              <div class="w-full max-w-[336px] aspect-[336/280] bg-stone-50 border border-stone-300 flex flex-col items-center justify-center text-stone-400 px-4 overflow-hidden">
+                <span class="text-[8px] sm:text-[9px] uppercase tracking-[0.22em] sm:tracking-[0.35em] mb-1">
+                  Publicidad
+                </span>
+                <span class="text-lg sm:text-xl font-light tracking-[0.12em] sm:tracking-[0.15em]">
+                  336 x 280
+                </span>
+                <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.18em] sm:tracking-[0.25em]">
+                  Rectángulo
+                </span>
+              </div>
             </div>
 
-            <div class="h-[180px] border border-stone-200 bg-stone-50 flex items-center justify-center text-stone-400 text-[11px] uppercase tracking-[0.2em]">
-              Anuncio
+            <!-- PUBLICIDAD LEADERBOARD 728x90 DESPUÉS DEL CUARTO PÁRRAFO -->
+            <div
+              v-if="index === 3"
+              class="w-full flex justify-center py-5 overflow-hidden"
+            >
+              <div class="w-full max-w-[728px] aspect-[728/90] min-h-[58px] sm:min-h-[70px] bg-stone-50 border border-stone-300 flex flex-col items-center justify-center text-stone-400 px-4 overflow-hidden">
+                <span class="text-[8px] sm:text-[9px] uppercase tracking-[0.22em] sm:tracking-[0.35em] mb-1">
+                  Publicidad
+                </span>
+                <span class="text-base sm:text-lg md:text-2xl font-light tracking-[0.12em] sm:tracking-[0.15em]">
+                  728 x 90
+                </span>
+                <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.18em] sm:tracking-[0.25em]">
+                  Leaderboard
+                </span>
+              </div>
             </div>
-          </aside>
+          </template>
         </div>
 
         <!-- COMPARTIR -->
-        <div class="flex items-center gap-2 mt-8 border-t border-b border-[#B70041]/30 py-4">
+        <div class="flex flex-wrap items-center gap-2 mt-8 border-t border-b border-[#B70041]/30 py-4">
           <span class="text-[11px] uppercase tracking-[0.2em] font-black text-[#B70041]/70 mr-2">
             Compartir
           </span>
-         
-          <span class=" w-6 h-6 rounded-full transition hover:scale-105 bg-blue-600 flex justify-center items-center"><a href="" class="fa-brands fa-facebook-f text-white"></a></span>
-          <span class="w-6 h-6 rounded-full transition hover:scale-105 bg-pink-500 flex justify-center items-center"><a href="" class="fa-brands fa-instagram text-white"></a></span>
-          <span class="w-6 h-6 rounded-full transition hover:scale-105 bg-green-600 flex justify-center items-center"><a href="" class="fa-brands fa-whatsapp text-white"></a></span>
-          <span class="w-6 h-6 rounded-full transition hover:scale-105 bg-stone-800 flex justify-center items-center"><a href="" class="fa-brands fa-x-twitter text-white"></a></span>
- 
+
+          <span class="w-7 h-7 sm:w-6 sm:h-6 rounded-full transition hover:scale-105 bg-blue-600 flex justify-center items-center">
+            <a href="#" class="fa-brands fa-facebook-f text-white"></a>
+          </span>
+
+          <span class="w-7 h-7 sm:w-6 sm:h-6 rounded-full transition hover:scale-105 bg-pink-500 flex justify-center items-center">
+            <a href="#" class="fa-brands fa-instagram text-white"></a>
+          </span>
+
+          <span class="w-7 h-7 sm:w-6 sm:h-6 rounded-full transition hover:scale-105 bg-green-600 flex justify-center items-center">
+            <a href="#" class="fa-brands fa-whatsapp text-white"></a>
+          </span>
+
+          <span class="w-7 h-7 sm:w-6 sm:h-6 rounded-full transition hover:scale-105 bg-stone-800 flex justify-center items-center">
+            <a href="#" class="fa-brands fa-x-twitter text-white"></a>
+          </span>
+        </div>
+
+        <!-- PUBLICIDAD FINAL 728x90 -->
+        <div class="w-full flex justify-center my-8 overflow-hidden">
+          <div class="w-full max-w-[728px] aspect-[728/90] min-h-[58px] sm:min-h-[70px] bg-stone-50 border border-stone-300 flex flex-col items-center justify-center text-stone-400 px-4 overflow-hidden">
+            <span class="text-[8px] sm:text-[9px] uppercase tracking-[0.22em] sm:tracking-[0.35em] mb-1">
+              Publicidad
+            </span>
+            <span class="text-base sm:text-lg md:text-2xl font-light tracking-[0.12em] sm:tracking-[0.15em]">
+              728 x 90
+            </span>
+            <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.18em] sm:tracking-[0.25em]">
+              Leaderboard
+            </span>
+          </div>
         </div>
 
         <!-- RELACIONADAS -->
         <section class="my-8">
-          <h2 class="text-xl font-bold border-b-2 border-b  text-[#B70041] border-[#B70041] pb-2 mb-4">
+          <h2 class="text-xl font-bold border-b-2 text-[#B70041] border-[#B70041] pb-2 mb-4">
             Te puede interesar
           </h2>
 
@@ -366,19 +437,23 @@ const relatedArticles = computed(() => {
             <article
               v-for="item in relatedArticles"
               :key="item.id"
-              class="grid grid-cols-[130px_1fr] gap-4"
+              class="grid grid-cols-[96px_minmax(0,1fr)] sm:grid-cols-[130px_minmax(0,1fr)] gap-3 sm:gap-4 min-w-0"
             >
-              <img :src="item.cover_image" class="w-full h-24 object-cover" />
+              <img
+                :src="item.cover_image"
+                :alt="item.title"
+                class="w-full h-24 object-cover"
+              />
 
-              <div>
+              <div class="min-w-0">
                 <router-link
                   :to="`/articulo/${item.slug}`"
-                  class="font-black leading-tight hover:underline"
+                  class="block font-black leading-tight hover:underline break-words"
                 >
                   {{ item.title }}
                 </router-link>
 
-                <p class="text-[11px] uppercase text-[#B70041]  tracking-[0.2em] mt-1">
+                <p class="text-[10px] sm:text-[11px] uppercase text-[#B70041] tracking-[0.18em] sm:tracking-[0.2em] mt-1">
                   {{ item.category }}
                 </p>
               </div>
@@ -389,23 +464,39 @@ const relatedArticles = computed(() => {
 
       <!-- SIDEBAR DERECHA -->
       <aside class="hidden lg:block">
-        <div class="sticky top-14 space-y-6">
-          <div class="h-[300px] border border-stone-200 bg-stone-50 flex items-center justify-center text-stone-400 text-[11px] uppercase tracking-[0.2em]">
-            Publicidad 300x250
+        <div class="sticky top-40 space-y-7">
+          <!-- 300x250 ROBAPÁGINAS -->
+          <div class="w-[300px] h-[250px] border border-stone-300 bg-stone-50 flex flex-col items-center justify-center text-stone-400">
+            <span class="text-[9px] uppercase tracking-[0.35em] mb-1">
+              Publicidad
+            </span>
+            <span class="text-2xl font-light tracking-[0.15em]">
+              300 x 250
+            </span>
+            <span class="text-[10px] uppercase tracking-[0.25em]">
+              Robapáginas
+            </span>
           </div>
 
-          <div class="">
-            <h3 class="border-b-2 text-[#B70041] pb-3 font-bold border-[#B70041] mb-3">Lo más leído</h3>
+          <!-- LO MÁS LEÍDO -->
+          <div>
+            <h3 class="border-b-2 text-[#B70041] pb-3 font-bold border-[#B70041] mb-3">
+              Lo más leído
+            </h3>
+
             <ol class="space-y-3">
               <li
                 v-for="(item, index) in relatedArticles"
                 :key="item.id"
-                class="grid grid-cols-[24px_1fr] gap-2"
+                class="grid grid-cols-[24px_minmax(0,1fr)] gap-2"
               >
-                <span class="text-[#B70041] text-md">{{ index + 1 }}</span>
+                <span class="text-[#B70041] text-md font-black">
+                  {{ index + 1 }}
+                </span>
+
                 <router-link
                   :to="`/articulo/${item.slug}`"
-                  class="text-sm font-bold leading-tight hover:underline"
+                  class="text-sm font-bold leading-tight hover:underline break-words"
                 >
                   {{ item.title }}
                 </router-link>
@@ -413,8 +504,17 @@ const relatedArticles = computed(() => {
             </ol>
           </div>
 
-          <div class="h-[600px] border border-stone-200 bg-stone-50 flex items-center justify-center text-stone-400 text-[11px] uppercase tracking-[0.2em]">
-            Publicidad 300x600
+          <!-- 300x600 HALF PAGE -->
+          <div class="w-[300px] h-[600px] border border-stone-300 bg-stone-50 flex flex-col items-center justify-center text-stone-400">
+            <span class="text-[9px] uppercase tracking-[0.35em] mb-1">
+              Publicidad
+            </span>
+            <span class="text-2xl font-light tracking-[0.15em]">
+              300 x 600
+            </span>
+            <span class="text-[10px] uppercase tracking-[0.25em]">
+              Half Page
+            </span>
           </div>
         </div>
       </aside>
