@@ -1,6 +1,8 @@
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 import { useRoute } from "vue-router";
+import { getArticleBySlug, getArticles } from "../services/articlesApi";
+import AdSlot from "../components/AdSlot.vue";
 
 import {
   Smartphone,
@@ -12,68 +14,100 @@ import {
 } from "lucide-vue-next";
 
 const menuOpen = ref(false);
-
 const route = useRoute();
 
-const articles = [
-  {
-    id: 1,
-    title: "Astorga prepara una gran agenda cultural para este verano",
-    slug: "agenda-cultural-astorga",
-    excerpt:
-      "La ciudad apuesta por conciertos, actividades gastronómicas y eventos turísticos para impulsar el comercio local durante los próximos meses.",
-    category: "Cultura",
-    cover_image:
-      "https://images.unsplash.com/photo-1495020689067-958852a7765e?q=80&w=1600&auto=format&fit=crop",
-  },
-  {
-    id: 2,
-    title: "Los comercios locales apuestan por digitalizar sus negocios",
-    slug: "comercios-digitalizacion",
-    excerpt:
-      "Cada vez más negocios de la comarca comienzan a invertir en presencia digital y nuevas formas de captar clientes.",
-    category: "Economía",
-    cover_image:
-      "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1200&auto=format&fit=crop",
-  },
-  {
-    id: 3,
-    title: "La gastronomía maragata gana protagonismo en redes sociales",
-    slug: "gastronomia-maragata-redes",
-    excerpt:
-      "Restaurantes y cafeterías de Astorga aumentan su presencia online para atraer turismo y reservas.",
-    category: "Gastronomía",
-    cover_image:
-      "https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1200&auto=format&fit=crop",
-  },
-  {
-    id: 4,
-    title: "Nuevas rutas de senderismo impulsan el turismo rural",
-    slug: "senderismo-turismo-rural",
-    excerpt:
-      "La comarca busca potenciar el turismo natural con nuevas experiencias para visitantes.",
-    category: "Turismo",
-    cover_image:
-      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop",
-  },
-];
+const article = ref(null);
+const relatedArticles = ref([]);
+const loading = ref(true);
+const error = ref("");
 
-const article = computed(() => {
-  return articles.find((item) => item.slug === route.params.slug) || articles[0];
+const fallbackImage =
+  "https://images.unsplash.com/photo-1495020689067-958852a7765e?q=80&w=1600&auto=format&fit=crop";
+
+function getArticleImage(item) {
+  return item?.cover_image?.trim() || fallbackImage;
+}
+
+function escapeHtml(value) {
+  return String(value || "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+const articleBodyHtml = computed(() => {
+  const body = article.value?.body || "";
+
+  if (!body.trim()) {
+    return "";
+  }
+
+  const looksLikeHtml = /<\/?[a-z][\s\S]*>/i.test(body);
+
+  if (looksLikeHtml) {
+    return body;
+  }
+
+  return body
+    .split(/\n+/)
+    .map((paragraph) => paragraph.trim())
+    .filter(Boolean)
+    .map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`)
+    .join("");
 });
 
-const relatedArticles = computed(() => {
-  return articles.filter((item) => item.slug !== article.value.slug);
+const formattedDate = computed(() => {
+  const rawDate = article.value?.published_at || article.value?.created_at;
+
+  if (!rawDate) {
+    return "Actualizado hoy";
+  }
+
+  return new Intl.DateTimeFormat("es-ES", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+  }).format(new Date(rawDate));
 });
 
-const articleParagraphs = [
-  "Astorga afronta los próximos meses con una programación cultural pensada para vecinos, visitantes y negocios locales. La ciudad busca reforzar su actividad con propuestas culturales, gastronómicas y turísticas.",
-  "La iniciativa pretende generar movimiento en el centro urbano, aumentar la presencia de visitantes y mejorar la conexión entre la vida cultural y el comercio de proximidad.",
-  "Según fuentes cercanas a la organización, la agenda se irá completando durante las próximas semanas con nuevos actos, actividades familiares y eventos al aire libre.",
-  "El objetivo principal es convertir la actividad cultural en una herramienta útil para dinamizar la ciudad y dar mayor visibilidad a los negocios locales.",
-  "Este tipo de programación permite mantener viva la actividad durante más meses del año, no solo en fechas concretas o temporadas de mayor afluencia turística.",
-  "La respuesta de los negocios locales será clave para medir el impacto real de estas iniciativas en la actividad comercial de la ciudad.",
-];
+async function loadArticle(slug) {
+  if (!slug) {
+    error.value = "No se encontró la noticia.";
+    loading.value = false;
+    return;
+  }
+
+  loading.value = true;
+  error.value = "";
+
+  try {
+    const currentArticle = await getArticleBySlug(slug);
+    article.value = currentArticle;
+
+    const articles = await getArticles({ limit: 8 });
+
+    relatedArticles.value = articles
+      .filter((item) => item.slug !== currentArticle.slug)
+      .slice(0, 4);
+  } catch (err) {
+    console.error(err);
+    error.value = "No se pudo cargar la noticia.";
+    article.value = null;
+    relatedArticles.value = [];
+  } finally {
+    loading.value = false;
+  }
+}
+
+watch(
+  () => route.params.slug,
+  (slug) => {
+    loadArticle(String(slug || ""));
+  },
+  { immediate: true }
+);
 </script>
 
 <template>
@@ -107,13 +141,13 @@ const articleParagraphs = [
             <img
               src="../assets/logo-imagen.png"
               alt="logo Horizonte León"
-              class="w-40  md:w-72 shrink-0"
+              class="w-20 sm:w-36 md:w-72 shrink-0"
             />
 
             <img
               src="../assets/logo.png"
               alt="logo Horizonte León"
-              class="w-40  md:w-60 shrink-0"
+              class="w-24 sm:w-36 md:w-60 shrink-0"
             />
           </div>
 
@@ -244,23 +278,36 @@ const articleParagraphs = [
 
     <!-- PUBLICIDAD BILLBOARD 970x250 -->
     <section class="w-full px-3 sm:px-4 py-4 sm:py-5 overflow-hidden">
-      <div class="max-w-[970px] mx-auto w-full">
-        <div class="w-full aspect-[970/250] min-h-[86px] sm:min-h-[110px] md:min-h-[120px] bg-stone-50 border border-stone-300 flex flex-col items-center justify-center text-stone-400 px-4 overflow-hidden">
-          <span class="text-[8px] sm:text-[10px] uppercase tracking-[0.22em] sm:tracking-[0.35em] mb-1 sm:mb-2">
-            Publicidad
-          </span>
-          <span class="text-lg sm:text-xl md:text-3xl font-light tracking-[0.12em] sm:tracking-[0.15em]">
-            970 x 250
-          </span>
-          <span class="text-[9px] sm:text-xs uppercase tracking-[0.18em] sm:tracking-[0.25em] mt-1">
-            Billboard
-          </span>
-        </div>
-      </div>
+      <AdSlot placement="billboard_970x250" />
     </section>
 
+    <!-- ESTADOS -->
+    <div
+      v-if="loading"
+      class="max-w-6xl mx-auto px-4 py-16 text-center text-stone-500"
+    >
+      Cargando noticia...
+    </div>
+
+    <div
+      v-else-if="error"
+      class="max-w-6xl mx-auto px-4 py-16 text-center text-[#B70041] font-bold"
+    >
+      {{ error }}
+    </div>
+
+    <div
+      v-else-if="!article"
+      class="max-w-6xl mx-auto px-4 py-16 text-center text-stone-500"
+    >
+      No se encontró la noticia.
+    </div>
+
     <!-- LAYOUT PRINCIPAL -->
-    <section class="max-w-6xl mx-auto px-3 sm:px-4 grid lg:grid-cols-[minmax(0,1fr)_300px] gap-8 overflow-hidden">
+    <section
+      v-else
+      class="max-w-6xl mx-auto px-3 sm:px-4 grid lg:grid-cols-[minmax(0,1fr)_300px] gap-8 overflow-hidden"
+    >
       <!-- ARTÍCULO -->
       <article class="w-full max-w-[760px] min-w-0">
         <p class="uppercase text-[12px] sm:text-[15px] tracking-[0.18em] sm:tracking-[0.2em] text-[#B70041]">
@@ -278,9 +325,9 @@ const articleParagraphs = [
         <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-[12px] text-stone-500 mt-4">
           <span>Redacción</span>
           <span>•</span>
-          <span>Astorga</span>
+          <span>{{ article.category }}</span>
           <span>•</span>
-          <span>Actualizado hoy</span>
+          <span>{{ formattedDate }}</span>
         </div>
 
         <div class="flex flex-wrap gap-2 mt-4">
@@ -302,22 +349,12 @@ const articleParagraphs = [
         </div>
 
         <!-- PUBLICIDAD LEADERBOARD 728x90 -->
-        <div class="w-full flex justify-center my-6 overflow-hidden">
-          <div class="w-full max-w-[728px] aspect-[728/90] min-h-[58px] sm:min-h-[70px] bg-stone-50 border border-stone-300 flex flex-col items-center justify-center text-stone-400 px-4 overflow-hidden">
-            <span class="text-[8px] sm:text-[9px] uppercase tracking-[0.22em] sm:tracking-[0.35em] mb-1">
-              Publicidad
-            </span>
-            <span class="text-base sm:text-lg md:text-2xl font-light tracking-[0.12em] sm:tracking-[0.15em]">
-              728 x 90
-            </span>
-            <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.18em] sm:tracking-[0.25em]">
-              Leaderboard
-            </span>
-          </div>
+        <div class="w-full my-6 overflow-hidden">
+          <AdSlot placement="leaderboard_728x90" />
         </div>
 
         <img
-          :src="article.cover_image"
+          :src="getArticleImage(article)"
           :alt="article.title"
           class="w-full h-64 sm:h-[360px] md:h-[460px] object-cover mt-5"
         />
@@ -327,66 +364,29 @@ const articleParagraphs = [
         </p>
 
         <!-- PUBLICIDAD RECTÁNGULO MÓVIL 336x280 -->
-        <div class="lg:hidden w-full flex justify-center my-7 overflow-hidden">
-          <div class="w-full max-w-[336px] aspect-[336/280] bg-stone-50 border border-stone-300 flex flex-col items-center justify-center text-stone-400 px-4 overflow-hidden">
-            <span class="text-[8px] sm:text-[9px] uppercase tracking-[0.22em] sm:tracking-[0.35em] mb-1">
-              Publicidad
-            </span>
-            <span class="text-lg sm:text-xl font-light tracking-[0.12em] sm:tracking-[0.15em]">
-              336 x 280
-            </span>
-            <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.18em] sm:tracking-[0.25em]">
-              Rectángulo
-            </span>
-          </div>
+        <div class="lg:hidden w-full my-7 overflow-hidden">
+          <AdSlot placement="rectangle_336x280" />
         </div>
 
-        <!-- CUERPO -->
-        <div class="mt-7 text-[16px] md:text-[17px] leading-[1.85] md:leading-[1.9] text-stone-800 space-y-5 min-w-0">
-          <template
-            v-for="(paragraph, index) in articleParagraphs"
-            :key="index"
-          >
-            <p>
-              {{ paragraph }}
-            </p>
+        <!-- CUERPO REAL DEL ARTÍCULO -->
+        <div
+          v-if="articleBodyHtml"
+          class="article-content mt-7 text-[16px] md:text-[17px] leading-[1.85] md:leading-[1.9] text-stone-800 min-w-0"
+          v-html="articleBodyHtml"
+        ></div>
 
-            <!-- PUBLICIDAD 336x280 DESPUÉS DEL SEGUNDO PÁRRAFO -->
-            <div
-              v-if="index === 1"
-              class="w-full flex justify-center py-5 overflow-hidden"
-            >
-              <div class="w-full max-w-[336px] aspect-[336/280] bg-stone-50 border border-stone-300 flex flex-col items-center justify-center text-stone-400 px-4 overflow-hidden">
-                <span class="text-[8px] sm:text-[9px] uppercase tracking-[0.22em] sm:tracking-[0.35em] mb-1">
-                  Publicidad
-                </span>
-                <span class="text-lg sm:text-xl font-light tracking-[0.12em] sm:tracking-[0.15em]">
-                  336 x 280
-                </span>
-                <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.18em] sm:tracking-[0.25em]">
-                  Rectángulo
-                </span>
-              </div>
-            </div>
+        <div
+          v-else
+          class="mt-7 text-[16px] md:text-[17px] leading-[1.85] md:leading-[1.9] text-stone-800 min-w-0"
+        >
+          <p>
+            {{ article.excerpt }}
+          </p>
+        </div>
 
-            <!-- PUBLICIDAD LEADERBOARD 728x90 DESPUÉS DEL CUARTO PÁRRAFO -->
-            <div
-              v-if="index === 3"
-              class="w-full flex justify-center py-5 overflow-hidden"
-            >
-              <div class="w-full max-w-[728px] aspect-[728/90] min-h-[58px] sm:min-h-[70px] bg-stone-50 border border-stone-300 flex flex-col items-center justify-center text-stone-400 px-4 overflow-hidden">
-                <span class="text-[8px] sm:text-[9px] uppercase tracking-[0.22em] sm:tracking-[0.35em] mb-1">
-                  Publicidad
-                </span>
-                <span class="text-base sm:text-lg md:text-2xl font-light tracking-[0.12em] sm:tracking-[0.15em]">
-                  728 x 90
-                </span>
-                <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.18em] sm:tracking-[0.25em]">
-                  Leaderboard
-                </span>
-              </div>
-            </div>
-          </template>
+        <!-- PUBLICIDAD 336x280 DESPUÉS DEL CUERPO -->
+        <div class="w-full py-5 overflow-hidden">
+          <AdSlot placement="rectangle_336x280" />
         </div>
 
         <!-- COMPARTIR -->
@@ -413,22 +413,15 @@ const articleParagraphs = [
         </div>
 
         <!-- PUBLICIDAD FINAL 728x90 -->
-        <div class="w-full flex justify-center my-8 overflow-hidden">
-          <div class="w-full max-w-[728px] aspect-[728/90] min-h-[58px] sm:min-h-[70px] bg-stone-50 border border-stone-300 flex flex-col items-center justify-center text-stone-400 px-4 overflow-hidden">
-            <span class="text-[8px] sm:text-[9px] uppercase tracking-[0.22em] sm:tracking-[0.35em] mb-1">
-              Publicidad
-            </span>
-            <span class="text-base sm:text-lg md:text-2xl font-light tracking-[0.12em] sm:tracking-[0.15em]">
-              728 x 90
-            </span>
-            <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.18em] sm:tracking-[0.25em]">
-              Leaderboard
-            </span>
-          </div>
+        <div class="w-full my-8 overflow-hidden">
+          <AdSlot placement="leaderboard_728x90" />
         </div>
 
         <!-- RELACIONADAS -->
-        <section class="my-8">
+        <section
+          v-if="relatedArticles.length"
+          class="my-8"
+        >
           <h2 class="text-xl font-bold border-b-2 text-[#B70041] border-[#B70041] pb-2 mb-4">
             Te puede interesar
           </h2>
@@ -439,11 +432,16 @@ const articleParagraphs = [
               :key="item.id"
               class="grid grid-cols-[96px_minmax(0,1fr)] sm:grid-cols-[130px_minmax(0,1fr)] gap-3 sm:gap-4 min-w-0"
             >
-              <img
-                :src="item.cover_image"
-                :alt="item.title"
-                class="w-full h-24 object-cover"
-              />
+              <router-link
+                :to="`/articulo/${item.slug}`"
+                class="block"
+              >
+                <img
+                  :src="getArticleImage(item)"
+                  :alt="item.title"
+                  class="w-full h-24 object-cover"
+                />
+              </router-link>
 
               <div class="min-w-0">
                 <router-link
@@ -466,20 +464,10 @@ const articleParagraphs = [
       <aside class="hidden lg:block">
         <div class="sticky top-40 space-y-7">
           <!-- 300x250 ROBAPÁGINAS -->
-          <div class="w-[300px] h-[250px] border border-stone-300 bg-stone-50 flex flex-col items-center justify-center text-stone-400">
-            <span class="text-[9px] uppercase tracking-[0.35em] mb-1">
-              Publicidad
-            </span>
-            <span class="text-2xl font-light tracking-[0.15em]">
-              300 x 250
-            </span>
-            <span class="text-[10px] uppercase tracking-[0.25em]">
-              Robapáginas
-            </span>
-          </div>
+          <AdSlot placement="sidebar_300x250" />
 
           <!-- LO MÁS LEÍDO -->
-          <div>
+          <div v-if="relatedArticles.length">
             <h3 class="border-b-2 text-[#B70041] pb-3 font-bold border-[#B70041] mb-3">
               Lo más leído
             </h3>
@@ -505,19 +493,61 @@ const articleParagraphs = [
           </div>
 
           <!-- 300x600 HALF PAGE -->
-          <div class="w-[300px] h-[600px] border border-stone-300 bg-stone-50 flex flex-col items-center justify-center text-stone-400">
-            <span class="text-[9px] uppercase tracking-[0.35em] mb-1">
-              Publicidad
-            </span>
-            <span class="text-2xl font-light tracking-[0.15em]">
-              300 x 600
-            </span>
-            <span class="text-[10px] uppercase tracking-[0.25em]">
-              Half Page
-            </span>
-          </div>
+          <AdSlot placement="sidebar_300x600" />
         </div>
       </aside>
     </section>
   </main>
 </template>
+
+<style scoped>
+.article-content :deep(p) {
+  margin-bottom: 1.25rem;
+}
+
+.article-content :deep(h2) {
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  font-size: 1.5rem;
+  line-height: 1.15;
+  font-weight: 900;
+  color: #111;
+}
+
+.article-content :deep(h3) {
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.25rem;
+  line-height: 1.2;
+  font-weight: 800;
+  color: #111;
+}
+
+.article-content :deep(a) {
+  color: #b70041;
+  text-decoration: underline;
+  font-weight: 700;
+}
+
+.article-content :deep(ul),
+.article-content :deep(ol) {
+  margin: 1.25rem 0;
+  padding-left: 1.5rem;
+}
+
+.article-content :deep(ul) {
+  list-style: disc;
+}
+
+.article-content :deep(ol) {
+  list-style: decimal;
+}
+
+.article-content :deep(blockquote) {
+  margin: 1.5rem 0;
+  padding-left: 1rem;
+  border-left: 4px solid #b70041;
+  color: #57534e;
+  font-weight: 600;
+}
+</style>

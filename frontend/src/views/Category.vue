@@ -1,6 +1,8 @@
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 import { useRoute } from "vue-router";
+import { getArticles } from "../services/articlesApi";
+import AdSlot from "../components/AdSlot.vue";
 
 import {
   Smartphone,
@@ -12,104 +14,76 @@ import {
 } from "lucide-vue-next";
 
 const menuOpen = ref(false);
-
 const route = useRoute();
 
-const articles = [
-  {
-    id: 1,
-    title: "Astorga prepara una gran agenda cultural para este verano",
-    slug: "agenda-cultural-astorga",
-    excerpt:
-      "La ciudad apuesta por conciertos, actividades gastronómicas y eventos turísticos para impulsar el comercio local durante los próximos meses.",
-    category: "Cultura",
-    cover_image:
-      "https://images.unsplash.com/photo-1495020689067-958852a7765e?q=80&w=1600&auto=format&fit=crop",
-    status: "published",
-  },
-  {
-    id: 2,
-    title: "Los comercios locales apuestan por digitalizar sus negocios",
-    slug: "comercios-digitalizacion",
-    excerpt:
-      "Cada vez más negocios de la comarca comienzan a invertir en presencia digital y nuevas formas de captar clientes.",
-    category: "Economía",
-    cover_image:
-      "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1200&auto=format&fit=crop",
-    status: "published",
-  },
-  {
-    id: 3,
-    title: "La gastronomía maragata gana protagonismo en redes sociales",
-    slug: "gastronomia-maragata-redes",
-    excerpt:
-      "Restaurantes y cafeterías de Astorga aumentan su presencia online para atraer turismo y reservas.",
-    category: "Gastronomía",
-    cover_image:
-      "https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1200&auto=format&fit=crop",
-    status: "published",
-  },
-  {
-    id: 4,
-    title: "Nuevas rutas de senderismo impulsan el turismo rural",
-    slug: "senderismo-turismo-rural",
-    excerpt:
-      "La comarca busca potenciar el turismo natural con nuevas experiencias para visitantes.",
-    category: "Turismo",
-    cover_image:
-      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop",
-    status: "published",
-  },
-  {
-    id: 5,
-    title: "Astorga mejora su programación de eventos deportivos",
-    slug: "eventos-deportivos-astorga",
-    excerpt:
-      "Las nuevas iniciativas buscan atraer visitantes y dinamizar la actividad local.",
-    category: "Deporte",
-    cover_image:
-      "https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=1200&auto=format&fit=crop",
-    status: "published",
-  },
-  {
-    id: 6,
-    title: "El comercio nocturno aumenta la actividad en el centro",
-    slug: "comercio-nocturno-centro",
-    excerpt:
-      "Locales y tiendas comienzan nuevas campañas para revitalizar el centro histórico.",
-    category: "Actualidad",
-    cover_image:
-      "https://images.unsplash.com/photo-1519501025264-65ba15a82390?q=80&w=1200&auto=format&fit=crop",
-    status: "published",
-  },
-  {
-    id: 7,
-    title: "La artesanía local busca nuevas oportunidades digitales",
-    slug: "artesania-oportunidades",
-    excerpt:
-      "Pequeños talleres y artesanos exploran nuevas plataformas para vender sus productos.",
-    category: "Economía",
-    cover_image:
-      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop",
-    status: "published",
-  },
-];
+const articles = ref([]);
+const loading = ref(true);
+const error = ref("");
 
-const categoryName = computed(() => {
-  return route.params.slug
-    ? String(route.params.slug).replaceAll("-", " ")
-    : "Actualidad";
+const fallbackImage =
+  "https://images.unsplash.com/photo-1495020689067-958852a7765e?q=80&w=1600&auto=format&fit=crop";
+
+const categoryMap = {
+  leon: "León",
+  ponferrada: "Ponferrada",
+  astorga: "Astorga",
+  baneza: "Bañeza",
+  deportes: "Deportes",
+  motor: "Motor",
+  zonaon: "ZonaON",
+  tendencias: "#tendencias",
+  tablon: "Tablón",
+  actualidad: "Actualidad",
+};
+
+const categorySlug = computed(() => {
+  return route.params.slug ? String(route.params.slug).toLowerCase() : "actualidad";
 });
 
-const mainArticle = computed(() => articles[0]);
-const listArticles = computed(() => articles.slice(1));
+const categoryName = computed(() => {
+  return categoryMap[categorySlug.value] || categorySlug.value.replaceAll("-", " ");
+});
+
+const mainArticle = computed(() => articles.value[0]);
+const listArticles = computed(() => articles.value.slice(1));
+const mostReadArticles = computed(() => articles.value.slice(0, 5));
+
+function getArticleImage(article) {
+  return article?.cover_image?.trim() || fallbackImage;
+}
+
+async function loadCategoryArticles() {
+  loading.value = true;
+  error.value = "";
+  articles.value = [];
+
+  try {
+    articles.value = await getArticles({
+      limit: 20,
+      category: categoryName.value,
+    });
+  } catch (err) {
+    console.error(err);
+    error.value = "No se pudieron cargar las noticias de esta categoría.";
+  } finally {
+    loading.value = false;
+  }
+}
+
+watch(
+  () => route.params.slug,
+  () => {
+    loadCategoryArticles();
+  },
+  { immediate: true }
+);
 </script>
 
 <template>
   <main class="min-h-screen bg-white text-[#111] overflow-x-hidden">
     <!-- MENU -->
     <header class="flex flex-col justify-center items-center border-stone-300 bg-white sticky top-0 z-50">
-      <nav class="bg-[#B70041] flex w-full mx-auto px-3 sm:px-6 py-1 items-center justify-center text-stone-500">
+      <nav class="bg-[#B70041] flex w-full mx-auto px-3 sm:px-6 py-1 items-center justify-center text-stone-500 overflow-hidden">
         <div class="flex w-full max-w-5xl justify-center gap-4 sm:gap-6 md:gap-16 text-white text-[12px] sm:text-[13px] md:text-[16px]">
           <a href="/categoria/leon" class="hover:underline whitespace-nowrap">León</a>
           <a href="/categoria/ponferrada" class="hover:underline whitespace-nowrap">Ponferrada</a>
@@ -119,7 +93,7 @@ const listArticles = computed(() => articles.slice(1));
       </nav>
 
       <div class="bg-white w-full mx-auto py-3 sm:py-5">
-        <div class="w-full max-w-5xl mx-auto grid grid-cols-[38px_1fr_38px] sm:grid-cols-[52px_1fr_52px] items-center px-3 sm:px-6">
+        <div class="w-full max-w-5xl mx-auto grid grid-cols-[38px_minmax(0,1fr)_38px] sm:grid-cols-[52px_minmax(0,1fr)_52px] items-center px-3 sm:px-6">
           <div class="flex items-center justify-start">
             <button
               @click="menuOpen = !menuOpen"
@@ -136,20 +110,20 @@ const listArticles = computed(() => articles.slice(1));
             <img
               src="../assets/logo-imagen.png"
               alt="logo Horizonte León"
-              class="w-40 md:w-72 shrink-0"
+              class="w-20 sm:w-36 md:w-72 shrink-0"
             />
 
             <img
               src="../assets/logo.png"
               alt="logo Horizonte León"
-              class="w-40 md:w-60 shrink-0"
+              class="w-24 sm:w-36 md:w-60 shrink-0"
             />
           </div>
 
           <div class="flex justify-end items-center">
             <CircleUserRound
               :stroke-width="1.5"
-              class="w-7 h-7 sm:w-8 sm:h-8 text-[#B70041] hover:scale-105 transition"
+              class="w-7 h-7 sm:w-8 sm:h-8 text-[#B70041] hover:scale-105 transition shrink-0"
             />
           </div>
         </div>
@@ -273,23 +247,36 @@ const listArticles = computed(() => articles.slice(1));
 
     <!-- PUBLICIDAD BILLBOARD 970x250 -->
     <section class="w-full px-3 sm:px-4 py-4 sm:py-5 overflow-hidden">
-      <div class="max-w-[970px] mx-auto w-full">
-        <div class="w-full aspect-[970/250] min-h-[86px] sm:min-h-[110px] md:min-h-[120px] bg-stone-50 border border-stone-300 flex flex-col items-center justify-center text-stone-400 px-4 overflow-hidden">
-          <span class="text-[8px] sm:text-[10px] uppercase tracking-[0.22em] sm:tracking-[0.35em] mb-1 sm:mb-2">
-            Publicidad
-          </span>
-          <span class="text-lg sm:text-xl md:text-3xl font-light tracking-[0.12em] sm:tracking-[0.15em]">
-            970 x 250
-          </span>
-          <span class="text-[9px] sm:text-xs uppercase tracking-[0.18em] sm:tracking-[0.25em] mt-1">
-            Billboard
-          </span>
-        </div>
-      </div>
+      <AdSlot placement="billboard_970x250" />
     </section>
 
+    <!-- ESTADOS -->
+    <div
+      v-if="loading"
+      class="max-w-6xl mx-auto px-4 py-16 text-center text-stone-500"
+    >
+      Cargando noticias de {{ categoryName }}...
+    </div>
+
+    <div
+      v-else-if="error"
+      class="max-w-6xl mx-auto px-4 py-16 text-center text-[#B70041] font-bold"
+    >
+      {{ error }}
+    </div>
+
+    <div
+      v-else-if="!articles.length"
+      class="max-w-6xl mx-auto px-4 py-16 text-center text-stone-500"
+    >
+      Todavía no hay noticias publicadas en {{ categoryName }}.
+    </div>
+
     <!-- CONTENEDOR PRINCIPAL -->
-    <section class="max-w-6xl mx-auto px-3 sm:px-4 pb-16 grid lg:grid-cols-[minmax(0,1fr)_300px] gap-8 overflow-hidden">
+    <section
+      v-else
+      class="max-w-6xl mx-auto px-3 sm:px-4 pb-16 grid lg:grid-cols-[minmax(0,1fr)_300px] gap-8 overflow-hidden"
+    >
       <!-- COLUMNA IZQUIERDA -->
       <div class="min-w-0">
         <div class="border-b-2 border-[#B70041] mb-5 flex items-center gap-2">
@@ -300,25 +287,15 @@ const listArticles = computed(() => articles.slice(1));
         </div>
 
         <!-- PUBLICIDAD LEADERBOARD 728x90 -->
-        <div class="w-full flex justify-center mb-7 overflow-hidden">
-          <div class="w-full max-w-[728px] aspect-[728/90] min-h-[58px] sm:min-h-[70px] bg-stone-50 border border-stone-300 flex flex-col items-center justify-center text-stone-400 px-4 overflow-hidden">
-            <span class="text-[8px] sm:text-[9px] uppercase tracking-[0.22em] sm:tracking-[0.35em] mb-1">
-              Publicidad
-            </span>
-            <span class="text-base sm:text-lg md:text-2xl font-light tracking-[0.12em] sm:tracking-[0.15em]">
-              728 x 90
-            </span>
-            <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.18em] sm:tracking-[0.25em]">
-              Leaderboard
-            </span>
-          </div>
+        <div class="w-full mb-7 overflow-hidden">
+          <AdSlot placement="leaderboard_728x90" />
         </div>
 
         <!-- NOTICIA PRINCIPAL -->
         <article v-if="mainArticle" class="mb-8 min-w-0">
           <router-link :to="`/articulo/${mainArticle.slug}`">
             <img
-              :src="mainArticle.cover_image"
+              :src="getArticleImage(mainArticle)"
               :alt="mainArticle.title"
               class="w-full h-56 sm:h-72 md:h-[320px] object-cover"
             />
@@ -338,22 +315,15 @@ const listArticles = computed(() => articles.slice(1));
         </article>
 
         <!-- PUBLICIDAD RECTÁNGULO 336x280 EN MÓVIL/TABLET -->
-        <div class="lg:hidden w-full flex justify-center mb-8 overflow-hidden">
-          <div class="w-full max-w-[336px] aspect-[336/280] bg-stone-50 border border-stone-300 flex flex-col items-center justify-center text-stone-400 px-4 overflow-hidden">
-            <span class="text-[8px] sm:text-[9px] uppercase tracking-[0.22em] sm:tracking-[0.35em] mb-1">
-              Publicidad
-            </span>
-            <span class="text-lg sm:text-xl font-light tracking-[0.12em] sm:tracking-[0.15em]">
-              336 x 280
-            </span>
-            <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.18em] sm:tracking-[0.25em]">
-              Rectángulo
-            </span>
-          </div>
+        <div class="lg:hidden w-full mb-8 overflow-hidden">
+          <AdSlot placement="rectangle_336x280" />
         </div>
 
         <!-- LISTA DE ARTÍCULOS -->
-        <div class="space-y-5 min-w-0">
+        <div
+          v-if="listArticles.length"
+          class="space-y-5 min-w-0"
+        >
           <template
             v-for="(article, index) in listArticles"
             :key="article.id"
@@ -361,7 +331,7 @@ const listArticles = computed(() => articles.slice(1));
             <article class="grid grid-cols-[96px_minmax(0,1fr)] sm:grid-cols-[130px_minmax(0,1fr)] md:grid-cols-[180px_minmax(0,1fr)] gap-3 sm:gap-4 border-b border-[#B70041]/30 pb-5 min-w-0">
               <router-link :to="`/articulo/${article.slug}`" class="min-w-0">
                 <img
-                  :src="article.cover_image"
+                  :src="getArticleImage(article)"
                   :alt="article.title"
                   class="w-full h-24 sm:h-28 md:h-32 object-cover"
                 />
@@ -388,37 +358,17 @@ const listArticles = computed(() => articles.slice(1));
             <!-- PUBLICIDAD 728x90 ENTRE NOTICIAS -->
             <div
               v-if="index === 1"
-              class="w-full flex justify-center py-3 overflow-hidden"
+              class="w-full py-3 overflow-hidden"
             >
-              <div class="w-full max-w-[728px] aspect-[728/90] min-h-[58px] sm:min-h-[70px] bg-stone-50 border border-stone-300 flex flex-col items-center justify-center text-stone-400 px-4 overflow-hidden">
-                <span class="text-[8px] sm:text-[9px] uppercase tracking-[0.22em] sm:tracking-[0.35em] mb-1">
-                  Publicidad
-                </span>
-                <span class="text-base sm:text-lg md:text-2xl font-light tracking-[0.12em] sm:tracking-[0.15em]">
-                  728 x 90
-                </span>
-                <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.18em] sm:tracking-[0.25em]">
-                  Leaderboard
-                </span>
-              </div>
+              <AdSlot placement="leaderboard_728x90" />
             </div>
 
             <!-- PUBLICIDAD RECTÁNGULO 336x280 ENTRE BLOQUES -->
             <div
               v-if="index === 3"
-              class="w-full flex justify-center py-4 overflow-hidden"
+              class="w-full py-4 overflow-hidden"
             >
-              <div class="w-full max-w-[336px] aspect-[336/280] bg-stone-50 border border-stone-300 flex flex-col items-center justify-center text-stone-400 px-4 overflow-hidden">
-                <span class="text-[8px] sm:text-[9px] uppercase tracking-[0.22em] sm:tracking-[0.35em] mb-1">
-                  Publicidad
-                </span>
-                <span class="text-lg sm:text-xl font-light tracking-[0.12em] sm:tracking-[0.15em]">
-                  336 x 280
-                </span>
-                <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.18em] sm:tracking-[0.25em]">
-                  Rectángulo
-                </span>
-              </div>
+              <AdSlot placement="rectangle_336x280" />
             </div>
           </template>
         </div>
@@ -428,27 +378,17 @@ const listArticles = computed(() => articles.slice(1));
       <aside class="hidden lg:block">
         <div class="sticky top-40 space-y-7">
           <!-- PUBLICIDAD 300x250 ROBAPÁGINAS -->
-          <div class="w-[300px] h-[250px] bg-stone-50 border border-stone-300 flex flex-col items-center justify-center text-stone-400">
-            <span class="text-[9px] uppercase tracking-[0.35em] mb-1">
-              Publicidad
-            </span>
-            <span class="text-2xl font-light tracking-[0.15em]">
-              300 x 250
-            </span>
-            <span class="text-[10px] uppercase tracking-[0.25em]">
-              Robapáginas
-            </span>
-          </div>
+          <AdSlot placement="sidebar_300x250" />
 
           <!-- LO MÁS LEÍDO -->
-          <div>
+          <div v-if="mostReadArticles.length">
             <h3 class="font-bold border-b-2 border-[#B70041] text-[#B70041] pb-2 mb-3">
               Lo más leído
             </h3>
 
             <ol class="space-y-4">
               <li
-                v-for="(article, index) in articles.slice(0, 5)"
+                v-for="(article, index) in mostReadArticles"
                 :key="article.id"
                 class="grid grid-cols-[30px_minmax(0,1fr)] gap-3"
               >
@@ -467,17 +407,7 @@ const listArticles = computed(() => articles.slice(1));
           </div>
 
           <!-- PUBLICIDAD 300x600 HALF PAGE -->
-          <div class="w-[300px] h-[600px] bg-stone-50 border border-stone-300 flex flex-col items-center justify-center text-stone-400">
-            <span class="text-[9px] uppercase tracking-[0.35em] mb-1">
-              Publicidad
-            </span>
-            <span class="text-2xl font-light tracking-[0.15em]">
-              300 x 600
-            </span>
-            <span class="text-[10px] uppercase tracking-[0.25em]">
-              Half Page
-            </span>
-          </div>
+          <AdSlot placement="sidebar_300x600" />
         </div>
       </aside>
     </section>

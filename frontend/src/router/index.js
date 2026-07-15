@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 import Home from "../views/Home.vue";
-import Article from "../views/Article.vue";
+import ArticlePage from "../views/ArticlePage.vue";
 import AdminLogin from "../views/AdminLogin.vue";
 import AdminDashboard from "../views/AdminDashboard.vue";
 import ArticleForm from "../views/ArticleForm.vue";
@@ -11,13 +11,13 @@ import Tendency from "../views/Tendency.vue"
 
 const routes = [
   { path: "/", component: Home },
-  {path: "/articulo/:slug", component: Article },
+  { path: "/articulo/:slug",name: "article",component: ArticlePage, },
   { path: "/admin", component: AdminLogin },
   { path: "/admin/dashboard", component: AdminDashboard },
   { path: "/admin/articulos/nuevo", component: ArticleForm },
   { path: "/admin/articulos/:id", component: ArticleForm },
   {path: "/categoria/:slug", component: Category},
-  { path: "/Zonaon/", component: ZonaOn },
+  { path: "/zonaon/", component: ZonaOn },
   { path: "/tendency/", component: Tendency }
   
 ];

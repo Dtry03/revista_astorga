@@ -22,18 +22,24 @@
     "node": ">=20"
   },
   "dependencies": {
+    "@adminforth/connector-postgres": "^1.0.5",
+    "@adminforth/rich-editor": "^2.1.2",
     "@dotenvx/dotenvx": "^1.34.0",
     "adminforth": "latest",
     "express": "latest-4",
+    "multer": "^2.2.0",
+    "pg": "^8.22.0",
     "zod": "^4.3.6"
   },
   "devDependencies": {
-    "typescript": "6.0.3",
+    "@prisma/client": "latest",
+    "@types/express": "^4.17.21",
+    "@types/multer": "^2.2.0",
+    "@types/node": "latest",
+    "@types/pg": "^8.20.0",
+    "prisma": "^7.0.0",
     "tsup": "^8.5.1",
     "tsx": "4.11.2",
-    "@types/express": "^4.17.21",
-    "@types/node": "latest",
-    "@prisma/client": "latest",
-    "prisma": "^7.0.0"
+    "typescript": "6.0.3"
   }
 }
