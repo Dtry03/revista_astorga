@@ -127,7 +127,7 @@ watch(
 <template>
   <main class="tendencias-bg min-h-screen text-[#111] overflow-x-hidden">
     <!-- MENU -->
-    <header class="flex flex-col justify-center items-center border-[#F3A6C8]/60 bg-[#FFF3F8]/95 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
+    <header class="flex flex-col justify-center items-center   sticky top-0 z-50 ">
       <nav class="bg-[#B70041] flex w-full mx-auto px-3 sm:px-6 py-1 items-center justify-center overflow-hidden">
         <div class="flex w-full max-w-5xl justify-center gap-4 sm:gap-6 md:gap-16 text-white text-[12px] sm:text-[13px] md:text-[16px]">
           <a href="/categoria/leon" class="hover:underline whitespace-nowrap">León</a>
@@ -137,7 +137,7 @@ watch(
         </div>
       </nav>
 
-      <div class="bg-[#FFF3F8]/95 backdrop-blur-sm w-full mx-auto">
+      <div class=" w-full mx-auto">
         <div class="w-full max-w-5xl mx-auto grid grid-cols-[38px_minmax(0,1fr)_38px] sm:grid-cols-[56px_minmax(0,1fr)_56px] items-center px-3 sm:px-6 py-4 sm:py-5">
           <div class="flex items-center justify-start">
             <button
@@ -152,9 +152,15 @@ watch(
           </div>
 
           <div class="flex text-center items-center justify-center min-w-0">
+              <img
+              src="../assets/logo-imagen.png"
+              alt="logo Horizonte León"
+              class="w-20 sm:w-36 md:w-72 shrink-0"
+            />
             <p class="text-2xl min-[380px]:text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-[#B70041] leading-none whitespace-nowrap">
               #tendencias
             </p>
+            
           </div>
 
           <div class="flex justify-end items-center">
@@ -192,7 +198,7 @@ watch(
       >
         <div
           v-if="menuOpen"
-          class="w-full bg-[#FFF3F8]/98 backdrop-blur-sm border-t border-[#F3A6C8]"
+          class="w-full "
         >
           <nav class="flex flex-col justify-center items-center">
             <p class="text-sm md:text-md border-b text-[#B70041] font-bold border-[#F3A6C8] lg:max-w-4xl w-full py-2 px-4">

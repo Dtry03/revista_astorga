@@ -186,7 +186,7 @@ watch(
       >
         <div
           v-if="menuOpen"
-          class="w-full bg-white border-t border-[#B70041]/20"
+          class="w-full bg-white "
         >
           <nav class="flex flex-col justify-center items-center">
             <p class="text-sm md:text-md border-b text-[#B70041] font-bold border-[#B70041]/40 lg:max-w-4xl w-full py-2 px-4">

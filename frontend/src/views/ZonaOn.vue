@@ -83,8 +83,8 @@ watch(
   <main class="zonaon-bg min-h-screen text-[#111] overflow-x-hidden">
     <!-- MENU -->
     <header class="flex flex-col justify-center items-center border-stone-200 bg-white sticky top-0 z-50">
-      <nav class="flex w-full mx-auto px-3 sm:px-6 py-1 items-center justify-center overflow-hidden">
-        <div class="flex w-full max-w-5xl justify-center gap-4 sm:gap-6 md:gap-16 text-black text-[12px] sm:text-[13px] md:text-[16px]">
+      <nav class="bg-[#B70041] flex w-full mx-auto px-3 sm:px-6 py-1 items-center justify-center overflow-hidden">
+        <div class="flex w-full max-w-5xl justify-center gap-4 sm:gap-6 md:gap-16 text-white text-[12px] sm:text-[13px] md:text-[16px]">
           <a href="/categoria/leon" class="hover:underline whitespace-nowrap">León</a>
           <a href="/categoria/ponferrada" class="hover:underline whitespace-nowrap">Ponferrada</a>
           <a href="/categoria/astorga" class="hover:underline whitespace-nowrap">Astorga</a>
@@ -100,14 +100,19 @@ watch(
               class="flex flex-col gap-1.5"
               aria-label="Abrir menú"
             >
-              <span class="w-6 h-0.5 bg-[#4AA3FF]"></span>
-              <span class="w-6 h-0.5 bg-[#4AA3FF]"></span>
-              <span class="w-6 h-0.5 bg-[#4AA3FF]"></span>
+              <span class="w-6 h-0.5 bg-[#3570B0]"></span>
+              <span class="w-6 h-0.5 bg-[#3570B0]"></span>
+              <span class="w-6 h-0.5 bg-[#3570B0]"></span>
             </button>
           </div>
 
           <div class="flex text-center items-center justify-center min-w-0">
-            <p class="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-[#4AA3FF] leading-none whitespace-nowrap">
+              <img
+              src="../assets/logo-imagen.png"
+              alt="logo Horizonte León"
+              class="w-20 sm:w-36 md:w-72 shrink-0"
+            />
+            <p class="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-[#3570B0] leading-none whitespace-nowrap">
               Zona<span class="text-[#B70041]">ON</span>
             </p>
           </div>
@@ -115,26 +120,26 @@ watch(
           <div class="flex justify-end items-center">
             <CircleUserRound
               :stroke-width="1.5"
-              class="w-7 h-7 sm:w-8 sm:h-8 text-[#4AA3FF] hover:scale-105 transition shrink-0"
+              class="w-7 h-7 sm:w-8 sm:h-8 text-[#3570B0] hover:scale-105 transition shrink-0"
             />
           </div>
         </div>
       </div>
 
       <div class="flex justify-center items-center w-full max-w-5xl gap-3 sm:gap-5 text-black text-[13px] md:text-[16px] py-2 px-4 overflow-hidden">
-        <Smartphone class="w-4 sm:w-5 md:w-6 h-5 md:h-6 text-[#4AA3FF] hover:scale-105 transition shrink-0" />
-        <hr class="border h-4 border-[#4AA3FF] shrink-0" />
+        <Smartphone class="w-4 sm:w-5 md:w-6 h-5 md:h-6 text-[#3570B0] hover:scale-105 transition shrink-0" />
+        <hr class="border h-4 border-[#3570B0] shrink-0" />
 
-        <Newspaper class="w-4 sm:w-5 md:w-6 h-5 md:h-6 text-[#4AA3FF] hover:scale-105 transition shrink-0" />
-        <hr class="border h-4 border-[#4AA3FF] shrink-0" />
+        <Newspaper class="w-4 sm:w-5 md:w-6 h-5 md:h-6 text-[#3570B0] hover:scale-105 transition shrink-0" />
+        <hr class="border h-4 border-[#3570B0] shrink-0" />
 
-        <MessageSquareText class="w-4 sm:w-5 md:w-6 h-5 md:h-6 text-[#4AA3FF] hover:scale-105 transition shrink-0" />
-        <hr class="border h-4 border-[#4AA3FF] shrink-0" />
+        <MessageSquareText class="w-4 sm:w-5 md:w-6 h-5 md:h-6 text-[#3570B0] hover:scale-105 transition shrink-0" />
+        <hr class="border h-4 border-[#3570B0] shrink-0" />
 
-        <MessageSquareHeart class="w-4 sm:w-5 md:w-6 h-5 md:h-6 text-[#4AA3FF] hover:scale-105 transition shrink-0" />
-        <hr class="border h-4 border-[#4AA3FF] shrink-0" />
+        <MessageSquareHeart class="w-4 sm:w-5 md:w-6 h-5 md:h-6 text-[#3570B0] hover:scale-105 transition shrink-0" />
+        <hr class="border h-4 border-[#3570B0] shrink-0" />
 
-        <Share2 class="w-4 sm:w-5 md:w-6 h-5 md:h-6 text-[#4AA3FF] hover:scale-105 transition shrink-0" />
+        <Share2 class="w-4 sm:w-5 md:w-6 h-5 md:h-6 text-[#3570B0] hover:scale-105 transition shrink-0" />
       </div>
 
       <transition
@@ -147,16 +152,16 @@ watch(
       >
         <div
           v-if="menuOpen"
-          class="w-full bg-white border-t border-[#4AA3FF]/30"
+          class="w-full bg-white "
         >
           <nav class="flex flex-col justify-center items-center">
-            <p class="text-sm md:text-md border-b text-[#4AA3FF] font-bold border-[#4AA3FF]/40 lg:max-w-4xl w-full py-2 px-4">
+            <p class="text-sm md:text-md border-b text-[#3570B0] font-bold border-[#3570B0]/40 lg:max-w-4xl w-full py-2 px-4">
               Secciones
             </p>
 
             <router-link
               to="/categoria/leon"
-              class="text-sm md:text-[16px] border-b border-[#4AA3FF]/20 lg:max-w-4xl w-full py-2 px-4 hover:text-[#B70041] text-black"
+              class="text-sm md:text-[16px] border-b border-[#3570B0]/20 lg:max-w-4xl w-full py-2 px-4 hover:text-[#B70041] text-black"
               @click="menuOpen = false"
             >
               León
@@ -164,7 +169,7 @@ watch(
 
             <router-link
               to="/categoria/ponferrada"
-              class="text-sm md:text-[16px] border-b border-[#4AA3FF]/20 lg:max-w-4xl w-full py-2 px-4 hover:text-[#B70041] text-black"
+              class="text-sm md:text-[16px] border-b border-[#3570B0]/20 lg:max-w-4xl w-full py-2 px-4 hover:text-[#B70041] text-black"
               @click="menuOpen = false"
             >
               Ponferrada
@@ -172,7 +177,7 @@ watch(
 
             <router-link
               to="/categoria/astorga"
-              class="text-sm md:text-[16px] border-b border-[#4AA3FF]/20 lg:max-w-4xl w-full py-2 px-4 hover:text-[#B70041] text-black"
+              class="text-sm md:text-[16px] border-b border-[#3570B0]/20 lg:max-w-4xl w-full py-2 px-4 hover:text-[#B70041] text-black"
               @click="menuOpen = false"
             >
               Astorga
@@ -180,7 +185,7 @@ watch(
 
             <router-link
               to="/categoria/baneza"
-              class="text-sm md:text-[16px] border-b border-[#4AA3FF]/20 lg:max-w-4xl w-full py-2 px-4 hover:text-[#B70041] text-black"
+              class="text-sm md:text-[16px] border-b border-[#3570B0]/20 lg:max-w-4xl w-full py-2 px-4 hover:text-[#B70041] text-black"
               @click="menuOpen = false"
             >
               Bañeza
@@ -188,7 +193,7 @@ watch(
 
             <router-link
               to="/categoria/deportes"
-              class="text-sm md:text-[16px] border-b border-[#4AA3FF]/20 lg:max-w-4xl w-full py-2 px-4 hover:text-[#B70041] text-black"
+              class="text-sm md:text-[16px] border-b border-[#3570B0]/20 lg:max-w-4xl w-full py-2 px-4 hover:text-[#B70041] text-black"
               @click="menuOpen = false"
             >
               Deportes
@@ -196,7 +201,7 @@ watch(
 
             <router-link
               to="/categoria/motor"
-              class="text-sm md:text-[16px] border-b border-[#4AA3FF]/20 lg:max-w-4xl w-full py-2 px-4 hover:text-[#B70041] text-black"
+              class="text-sm md:text-[16px] border-b border-[#3570B0]/20 lg:max-w-4xl w-full py-2 px-4 hover:text-[#B70041] text-black"
               @click="menuOpen = false"
             >
               Motor
@@ -204,7 +209,7 @@ watch(
 
             <router-link
               to="/zonaon/"
-              class="text-sm md:text-[16px] border-b border-[#4AA3FF]/20 lg:max-w-4xl w-full py-2 px-4 hover:text-[#B70041] text-black"
+              class="text-sm md:text-[16px] border-b border-[#3570B0]/20 lg:max-w-4xl w-full py-2 px-4 hover:text-[#B70041] text-black"
               @click="menuOpen = false"
             >
               Zona<span class="font-bold">ON</span>
@@ -212,7 +217,7 @@ watch(
 
             <router-link
               to="/tendency/"
-              class="text-sm md:text-[16px] border-b border-[#4AA3FF]/20 lg:max-w-4xl w-full py-2 px-4 hover:text-[#B70041] text-black"
+              class="text-sm md:text-[16px] border-b border-[#3570B0]/20 lg:max-w-4xl w-full py-2 px-4 hover:text-[#B70041] text-black"
               @click="menuOpen = false"
             >
               #tendencias
@@ -220,7 +225,7 @@ watch(
 
             <router-link
               to="/categoria/tablon"
-              class="text-sm md:text-[16px] border-b border-[#4AA3FF]/20 lg:max-w-4xl w-full py-2 px-4 hover:text-[#B70041] text-black"
+              class="text-sm md:text-[16px] border-b border-[#3570B0]/20 lg:max-w-4xl w-full py-2 px-4 hover:text-[#B70041] text-black"
               @click="menuOpen = false"
             >
               Tablón
@@ -230,7 +235,7 @@ watch(
       </transition>
 
       <div>
-        <p class="text-[8px] sm:text-[9px] md:text-[10px] py-2 px-3 text-center font-bold text-[#4AA3FF]">
+        <p class="text-[8px] sm:text-[9px] md:text-[10px] py-2 px-3 text-center font-bold text-[#3570B0]">
           INFORMACIÓN SIN LIMITES.
           <span class="text-[#B70041]">CONECTAMOS CONTIGO</span>
         </p>
@@ -271,9 +276,9 @@ watch(
     >
       <!-- COLUMNA IZQUIERDA -->
       <div class="min-w-0">
-        <div class="border-b-2 border-[#4AA3FF] mb-5 flex items-center gap-2">
+        <div class="border-b-2 border-[#3570B0] mb-5 flex items-center gap-2">
           <span class="w-3 h-3 bg-[#B70041] shrink-0"></span>
-          <h2 class="text-lg sm:text-xl font-bold capitalize text-[#4AA3FF] break-words">
+          <h2 class="text-lg sm:text-xl font-bold capitalize text-[#3570B0] break-words">
             {{ categoryName }}
           </h2>
         </div>
@@ -301,7 +306,7 @@ watch(
             {{ mainArticle.category }}
           </p>
 
-          <p class="text-[#4AA3FF] text-sm sm:text-[15px] mt-2 leading-relaxed">
+          <p class="text-[#3570B0] text-sm sm:text-[15px] mt-2 leading-relaxed">
             {{ mainArticle.excerpt }}
           </p>
         </article>
@@ -341,7 +346,7 @@ watch(
                   {{ article.category }}
                 </p>
 
-                <p class="text-[#4AA3FF] text-xs sm:text-sm mt-2 leading-relaxed line-clamp-2 sm:line-clamp-3">
+                <p class="text-[#3570B0] text-xs sm:text-sm mt-2 leading-relaxed line-clamp-2 sm:line-clamp-3">
                   {{ article.excerpt }}
                 </p>
               </div>
@@ -374,7 +379,7 @@ watch(
 
           <!-- LO MÁS LEÍDO -->
           <div v-if="mostReadArticles.length">
-            <h3 class="font-bold border-b-2 border-[#4AA3FF] text-[#4AA3FF] pb-2 mb-3">
+            <h3 class="font-bold border-b-2 border-[#3570B0] text-[#3570B0] pb-2 mb-3">
               Lo más leído
             </h3>
 
