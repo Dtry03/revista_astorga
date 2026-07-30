@@ -127,7 +127,7 @@ watch(
 <template>
   <main class="tendencias-bg min-h-screen text-[#111] overflow-x-hidden">
     <!-- MENU -->
-    <header class="flex flex-col justify-center items-center   sticky top-0 z-50 ">
+    <header class="flex flex-col justify-center items-center   bg-white  sticky top-0 z-50 ">
       <nav class="bg-[#B70041] flex w-full mx-auto px-3 sm:px-6 py-1 items-center justify-center overflow-hidden">
         <div class="flex w-full max-w-5xl justify-center gap-4 sm:gap-6 md:gap-16 text-white text-[12px] sm:text-[13px] md:text-[16px]">
           <a href="/categoria/leon" class="hover:underline whitespace-nowrap">León</a>
@@ -146,7 +146,7 @@ watch(
               aria-label="Abrir menú"
             >
               <span class="w-6 h-0.5 bg-[#B70041]"></span>
-              <span class="w-6 h-0.5 bg-[#00AFC2]"></span>
+              <span class="w-6 h-0.5 bg-[#715CBD]"></span>
               <span class="w-6 h-0.5 bg-[#B70041]"></span>
             </button>
           </div>
@@ -157,7 +157,7 @@ watch(
               alt="logo Horizonte León"
               class="w-20 sm:w-36 md:w-72 shrink-0"
             />
-            <p class="text-2xl min-[380px]:text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-[#B70041] leading-none whitespace-nowrap">
+            <p class="text-xl min-[380px]:text-xl sm:text-xl md:text-5xl  font-black tracking-tight text-[#B70041] leading-none whitespace-nowrap">
               #tendencias
             </p>
             
@@ -166,26 +166,26 @@ watch(
           <div class="flex justify-end items-center">
             <CircleUserRound
               :stroke-width="1.5"
-              class="w-7 h-7 sm:w-8 sm:h-8 text-[#00AFC2] hover:scale-105 transition shrink-0"
+              class="w-7 h-7 sm:w-8 sm:h-8 text-[#715CBD] hover:scale-105 transition shrink-0"
             />
           </div>
         </div>
       </div>
 
       <div class="flex justify-center items-center w-full max-w-5xl gap-3 sm:gap-5 text-[#111] text-[13px] md:text-[16px] py-2 px-4 overflow-hidden">
-        <Smartphone class="w-4 sm:w-5 md:w-6 h-5 md:h-6 text-[#00AFC2] hover:scale-105 transition shrink-0" />
+        <Smartphone class="w-4 sm:w-5 md:w-6 h-5 md:h-6 text-[#715CBD] hover:scale-105 transition shrink-0" />
         <hr class="border h-4 border-[#B70041] shrink-0" />
 
-        <Newspaper class="w-4 sm:w-5 md:w-6 h-5 md:h-6 text-[#00AFC2] hover:scale-105 transition shrink-0" />
+        <Newspaper class="w-4 sm:w-5 md:w-6 h-5 md:h-6 text-[#715CBD] hover:scale-105 transition shrink-0" />
         <hr class="border h-4 border-[#B70041] shrink-0" />
 
-        <MessageSquareText class="w-4 sm:w-5 md:w-6 h-5 md:h-6 text-[#00AFC2] hover:scale-105 transition shrink-0" />
+        <MessageSquareText class="w-4 sm:w-5 md:w-6 h-5 md:h-6 text-[#715CBD] hover:scale-105 transition shrink-0" />
         <hr class="border h-4 border-[#B70041] shrink-0" />
 
-        <MessageSquareHeart class="w-4 sm:w-5 md:w-6 h-5 md:h-6 text-[#00AFC2] hover:scale-105 transition shrink-0" />
+        <MessageSquareHeart class="w-4 sm:w-5 md:w-6 h-5 md:h-6 text-[#715CBD] hover:scale-105 transition shrink-0" />
         <hr class="border h-4 border-[#B70041] shrink-0" />
 
-        <Share2 class="w-4 sm:w-5 md:w-6 h-5 md:h-6 text-[#00AFC2] hover:scale-105 transition shrink-0" />
+        <Share2 class="w-4 sm:w-5 md:w-6 h-5 md:h-6 text-[#715CBD] hover:scale-105 transition shrink-0" />
       </div>
 
       <transition
@@ -281,7 +281,7 @@ watch(
       </transition>
 
       <div>
-        <p class="text-[8px] sm:text-[9px] md:text-[10px] py-2 px-3 text-center font-bold text-[#00AFC2]">
+        <p class="text-[8px] sm:text-[9px] md:text-[10px] py-2 px-3 text-center font-bold text-[#715CBD]">
           INFORMACIÓN SIN LIMITES.
           <span class="text-[#B70041]">CONECTAMOS CONTIGO</span>
         </p>
@@ -312,7 +312,7 @@ watch(
             <span class="text-lg sm:text-xl md:text-3xl font-light tracking-[0.12em] sm:tracking-[0.15em] text-[#B70041]">
               970 x 250
             </span>
-            <span class="text-[9px] sm:text-xs uppercase tracking-[0.18em] sm:tracking-[0.25em] mt-1 text-[#00AFC2]">
+            <span class="text-[9px] sm:text-xs uppercase tracking-[0.18em] sm:tracking-[0.25em] mt-1 text-[#715CBD]">
               Billboard
             </span>
           </template>
@@ -350,7 +350,7 @@ watch(
       <!-- COLUMNA IZQUIERDA -->
       <div class="min-w-0">
         <div class="border-b-2 border-[#B70041] mb-5 flex items-center gap-2 bg-[#FFF3F8]/90 backdrop-blur-sm rounded-t-2xl px-3 py-3">
-          <span class="w-3 h-3 bg-[#00AFC2] shrink-0"></span>
+          <span class="w-3 h-3 bg-[#715CBD] shrink-0"></span>
           <h2 class="text-lg sm:text-xl font-black capitalize text-[#B70041] break-words">
             #{{ categoryName }}
           </h2>
@@ -379,7 +379,7 @@ watch(
               <span class="text-base sm:text-lg md:text-2xl font-light tracking-[0.12em] sm:tracking-[0.15em] text-[#B70041]">
                 728 x 90
               </span>
-              <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.18em] sm:tracking-[0.25em] text-[#00AFC2]">
+              <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.18em] sm:tracking-[0.25em] text-[#715CBD]">
                 Leaderboard
               </span>
             </template>
@@ -397,7 +397,7 @@ watch(
           </router-link>
 
           <div class="p-4 sm:p-5 min-w-0">
-            <p class="text-[10px] sm:text-xs uppercase text-[#00AFC2] tracking-[0.18em] sm:tracking-[0.2em] mb-2 font-black">
+            <p class="text-[10px] sm:text-xs uppercase text-[#715CBD] tracking-[0.18em] sm:tracking-[0.2em] mb-2 font-black">
               #tendencias
             </p>
 
@@ -443,7 +443,7 @@ watch(
               <span class="text-lg sm:text-xl font-light tracking-[0.12em] sm:tracking-[0.15em] text-[#B70041]">
                 336 x 280
               </span>
-              <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.18em] sm:tracking-[0.25em] text-[#00AFC2]">
+              <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.18em] sm:tracking-[0.25em] text-[#715CBD]">
                 Rectángulo
               </span>
             </template>
@@ -466,7 +466,7 @@ watch(
               </router-link>
 
               <div class="p-4 sm:p-5 min-w-0">
-                <p class="text-[10px] sm:text-xs uppercase text-[#00AFC2] tracking-[0.18em] sm:tracking-[0.2em] mb-2 font-black">
+                <p class="text-[10px] sm:text-xs uppercase text-[#715CBD] tracking-[0.18em] sm:tracking-[0.2em] mb-2 font-black">
                   #tendencias
                 </p>
 
@@ -513,7 +513,7 @@ watch(
                   <span class="text-base sm:text-lg md:text-2xl font-light tracking-[0.12em] sm:tracking-[0.15em] text-[#B70041]">
                     728 x 90
                   </span>
-                  <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.18em] sm:tracking-[0.25em] text-[#00AFC2]">
+                  <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.18em] sm:tracking-[0.25em] text-[#715CBD]">
                     Leaderboard
                   </span>
                 </template>
@@ -546,7 +546,7 @@ watch(
                   <span class="text-lg sm:text-xl font-light tracking-[0.12em] sm:tracking-[0.15em] text-[#B70041]">
                     336 x 280
                   </span>
-                  <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.18em] sm:tracking-[0.25em] text-[#00AFC2]">
+                  <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.18em] sm:tracking-[0.25em] text-[#715CBD]">
                     Rectángulo
                   </span>
                 </template>
@@ -581,7 +581,7 @@ watch(
               <span class="text-2xl font-light tracking-[0.15em] text-[#B70041]">
                 300 x 250
               </span>
-              <span class="text-[10px] uppercase tracking-[0.25em] text-[#00AFC2]">
+              <span class="text-[10px] uppercase tracking-[0.25em] text-[#715CBD]">
                 Robapáginas
               </span>
             </template>
@@ -599,7 +599,7 @@ watch(
                 :key="article.id"
                 class="grid grid-cols-[30px_minmax(0,1fr)] gap-3"
               >
-                <span class="text-[#00AFC2] font-black">
+                <span class="text-[#715CBD] font-black">
                   {{ index + 1 }}
                 </span>
 
@@ -635,7 +635,7 @@ watch(
               <span class="text-2xl font-light tracking-[0.15em] text-[#B70041]">
                 300 x 600
               </span>
-              <span class="text-[10px] uppercase tracking-[0.25em] text-[#00AFC2]">
+              <span class="text-[10px] uppercase tracking-[0.25em] text-[#715CBD]">
                 Half Page
               </span>
             </template>

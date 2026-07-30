@@ -179,7 +179,7 @@ watch(
 <template>
   <main class="tendencias-bg min-h-screen text-[#111] overflow-x-hidden">
     <!-- MENU -->
-    <header class="flex flex-col justify-center items-center  sticky top-0 z-50">
+    <header class="flex flex-col justify-center items-center  bg-white  sticky top-0 z-50">
       <nav class="bg-[#B70041] flex w-full mx-auto px-3 sm:px-6 py-1 items-center justify-center overflow-hidden">
         <div class="flex w-full max-w-5xl justify-center gap-4 sm:gap-6 md:gap-16 text-white text-[12px] sm:text-[13px] md:text-[16px]">
           <a href="/categoria/leon" class="hover:underline whitespace-nowrap">León</a>
@@ -188,8 +188,7 @@ watch(
           <a href="/categoria/baneza" class="hover:underline whitespace-nowrap">Bañeza</a>
         </div>
       </nav>
-
-      <div class="w-full mx-auto">
+      <div class=" w-full mx-auto">
         <div class="w-full max-w-5xl mx-auto grid grid-cols-[38px_minmax(0,1fr)_38px] sm:grid-cols-[56px_minmax(0,1fr)_56px] items-center px-3 sm:px-6 py-4 sm:py-5">
           <div class="flex items-center justify-start">
             <button
@@ -198,43 +197,46 @@ watch(
               aria-label="Abrir menú"
             >
               <span class="w-6 h-0.5 bg-[#B70041]"></span>
-              <span class="w-6 h-0.5 bg-[#00AFC2]"></span>
+              <span class="w-6 h-0.5 bg-[#8408FF]"></span>
               <span class="w-6 h-0.5 bg-[#B70041]"></span>
             </button>
           </div>
 
           <div class="flex text-center items-center justify-center min-w-0">
-            <router-link
-              to="/categoria/tendencias"
-              class="text-2xl min-[380px]:text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-[#B70041] leading-none whitespace-nowrap"
-            >
+              <img
+              src="../assets/logo-imagen.png"
+              alt="logo Horizonte León"
+              class="w-20 sm:w-36 md:w-72 shrink-0"
+            />
+            <p class="text-xl min-[380px]:text-xl sm:text-xl md:text-5xl font-black tracking-tight text-[#B70041] leading-none whitespace-nowrap">
               #tendencias
-            </router-link>
+            </p>
+            
           </div>
 
           <div class="flex justify-end items-center">
             <CircleUserRound
               :stroke-width="1.5"
-              class="w-7 h-7 sm:w-8 sm:h-8 text-[#00AFC2] hover:scale-105 transition shrink-0"
+              class="w-7 h-7 sm:w-8 sm:h-8 text-[#8408FF] hover:scale-105 transition shrink-0"
             />
           </div>
         </div>
       </div>
 
       <div class="flex justify-center items-center w-full max-w-5xl gap-3 sm:gap-5 text-[#111] text-[13px] md:text-[16px] py-2 px-4 overflow-hidden">
-        <Smartphone class="w-4 sm:w-5 md:w-6 h-5 md:h-6 text-[#00AFC2] hover:scale-105 transition shrink-0" />
+        <Smartphone class="w-4 sm:w-5 md:w-6 h-5 md:h-6 text-[#8408FF] hover:scale-105 transition shrink-0" />
         <hr class="border h-4 border-[#B70041] shrink-0" />
 
-        <Newspaper class="w-4 sm:w-5 md:w-6 h-5 md:h-6 text-[#00AFC2] hover:scale-105 transition shrink-0" />
+        <Newspaper class="w-4 sm:w-5 md:w-6 h-5 md:h-6 text-[#8408FF] hover:scale-105 transition shrink-0" />
         <hr class="border h-4 border-[#B70041] shrink-0" />
 
-        <MessageSquareText class="w-4 sm:w-5 md:w-6 h-5 md:h-6 text-[#00AFC2] hover:scale-105 transition shrink-0" />
+        <MessageSquareText class="w-4 sm:w-5 md:w-6 h-5 md:h-6 text-[#8408FF] hover:scale-105 transition shrink-0" />
         <hr class="border h-4 border-[#B70041] shrink-0" />
 
-        <MessageSquareHeart class="w-4 sm:w-5 md:w-6 h-5 md:h-6 text-[#00AFC2] hover:scale-105 transition shrink-0" />
+        <MessageSquareHeart class="w-4 sm:w-5 md:w-6 h-5 md:h-6 text-[#8408FF] hover:scale-105 transition shrink-0" />
         <hr class="border h-4 border-[#B70041] shrink-0" />
 
-        <Share2 class="w-4 sm:w-5 md:w-6 h-5 md:h-6 text-[#00AFC2] hover:scale-105 transition shrink-0" />
+        <Share2 class="w-4 sm:w-5 md:w-6 h-5 md:h-6 text-[#8408FF] hover:scale-105 transition shrink-0" />
       </div>
 
       <transition
@@ -330,7 +332,7 @@ watch(
       </transition>
 
       <div>
-        <p class="text-[8px] sm:text-[9px] md:text-[10px] py-2 px-3 text-center font-bold text-[#00AFC2]">
+        <p class="text-[8px] sm:text-[9px] md:text-[10px] py-2 px-3 text-center font-bold text-[#8408FF]">
           INFORMACIÓN SIN LIMITES.
           <span class="text-[#B70041]">CONECTAMOS CONTIGO</span>
         </p>
@@ -363,7 +365,7 @@ watch(
               970 x 250
             </span>
 
-            <span class="text-[9px] sm:text-xs uppercase tracking-[0.18em] sm:tracking-[0.25em] mt-1 text-[#00AFC2]">
+            <span class="text-[9px] sm:text-xs uppercase tracking-[0.18em] sm:tracking-[0.25em] mt-1 text-[#8408FF]">
               Billboard
             </span>
           </template>
@@ -401,7 +403,7 @@ watch(
       <!-- ARTÍCULO -->
       <article class="w-full max-w-[760px] min-w-0">
         <div class="bg-[#FFF3F8]/95 backdrop-blur-sm border border-[#F3A6C8] rounded-2xl sm:rounded-[28px] px-4 sm:px-6 md:px-8 py-6 sm:py-8 shadow-sm">
-          <p class="uppercase text-[12px] sm:text-[15px] tracking-[0.18em] sm:tracking-[0.2em] text-[#00AFC2] font-black">
+          <p class="uppercase text-[12px] sm:text-[15px] tracking-[0.18em] sm:tracking-[0.2em] text-[#8408FF] font-black">
             #tendencias
           </p>
 
@@ -486,7 +488,7 @@ watch(
                   728 x 90
                 </span>
 
-                <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.18em] sm:tracking-[0.25em] text-[#00AFC2]">
+                <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.18em] sm:tracking-[0.25em] text-[#8408FF]">
                   Leaderboard
                 </span>
               </template>
@@ -528,7 +530,7 @@ watch(
                   336 x 280
                 </span>
 
-                <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.18em] sm:tracking-[0.25em] text-[#00AFC2]">
+                <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.18em] sm:tracking-[0.25em] text-[#8408FF]">
                   Rectángulo
                 </span>
               </template>
@@ -576,7 +578,7 @@ watch(
                   336 x 280
                 </span>
 
-                <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.18em] sm:tracking-[0.25em] text-[#00AFC2]">
+                <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.18em] sm:tracking-[0.25em] text-[#8408FF]">
                   Rectángulo
                 </span>
               </template>
@@ -653,7 +655,7 @@ watch(
                   728 x 90
                 </span>
 
-                <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.18em] sm:tracking-[0.25em] text-[#00AFC2]">
+                <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.18em] sm:tracking-[0.25em] text-[#8408FF]">
                   Leaderboard
                 </span>
               </template>
@@ -731,7 +733,7 @@ watch(
                 300 x 250
               </span>
 
-              <span class="text-[10px] uppercase tracking-[0.25em] text-[#00AFC2]">
+              <span class="text-[10px] uppercase tracking-[0.25em] text-[#8408FF]">
                 Robapáginas
               </span>
             </template>
@@ -752,7 +754,7 @@ watch(
                 :key="item.id"
                 class="grid grid-cols-[24px_minmax(0,1fr)] gap-2"
               >
-                <span class="text-[#00AFC2] text-md font-black">
+                <span class="text-[#8408FF] text-md font-black">
                   {{ index + 1 }}
                 </span>
 
@@ -790,7 +792,7 @@ watch(
                 300 x 600
               </span>
 
-              <span class="text-[10px] uppercase tracking-[0.25em] text-[#00AFC2]">
+              <span class="text-[10px] uppercase tracking-[0.25em] text-[#8408FF]">
                 Half Page
               </span>
             </template>
